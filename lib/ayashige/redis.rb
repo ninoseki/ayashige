@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "redis"
-require "dotenv/load"
 
 module Ayashige
   module Redis

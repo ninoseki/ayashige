@@ -2,5 +2,9 @@ $LOAD_PATH.unshift("#{__dir__}/../lib")
 
 require "ayashige"
 
-job = Ayashige::Jobs::CronJob.new
-job.perform
+begin
+  job = Ayashige::Jobs::CronJob.new
+  job.perform
+rescue StandardError => e
+  Rollbar.error e
+end
