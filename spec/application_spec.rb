@@ -20,16 +20,19 @@ RSpec.describe "Application" do
   describe "GET /feed" do
     before do
       allow(Ayashige::Store).to receive(:all).and_return(
-        "2018-01-01": ["test.com", "example.com"]
+        "2018-01-01": ["paypal.pay.pay.com", "google.apple.microsoft.com"]
       )
     end
 
     it "should return 200 OK" do
       get "/feed"
       expect(last_response).to be_ok
-      json = JSON.parse(last_response.body.to_s)
-      expect(json).to be_a(Hash)
-      expect(json.keys).to eq(["2018-01-01"])
+      array = JSON.parse(last_response.body.to_s)
+      expect(array).to be_a(Array)
+      first = array.first
+      expect(first["domain"]).to eq("paypal.pay.pay.com")
+      expect(first["created"]).to eq("2018-01-01")
+      expect(first["score"]).to be_an(Integer)
     end
   end
 end

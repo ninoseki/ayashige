@@ -15,7 +15,19 @@ module Ayashige
     get "/feed" do
       content_type :json
 
-      Store.all.to_json
+      array = []
+      data = Store.all
+      data.each do |key, values|
+        values.each do |value|
+          domain = Domain.new(value)
+          array << {
+            domain: domain.to_s,
+            score: domain.score,
+            created: key
+          }
+        end
+      end
+      array.to_json
     end
   end
 end
