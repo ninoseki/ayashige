@@ -37,7 +37,7 @@ REDIS_PASSWORD = YOUR_REDIS_PASSWORDE
 bundle exec ruby bin/cron_job.rb
 ```
 
-- The job crawls WebAnalyzer website and parsed the latest registered domains.
+- The job crawls WebAnalyzer websites and parsed the latest registered domains.
 - It checks a suspicious score of a given each domain and stores a suspicious one into a Redis instance.
 
 ### Run a Web app
@@ -45,6 +45,16 @@ bundle exec ruby bin/cron_job.rb
 ```
 bundle exec puma config.ru
 ```
+
+## Demo
+
+- https://ayashige.herokuapp.com/feed
+
+- Notes:
+  - This app is hosted on Heroku free dyno.
+  - The Cron job is triggered at 20:00 UTC+0 every day.
+  - The data in the Redis instance will expire after 48 hours.
+  - I'm running this app just as a hobby and I cannot assure its consistency.
 
 ## Contributing
 
