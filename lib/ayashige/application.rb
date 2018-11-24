@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 require "sinatra/base"
+require "rollbar/middleware/sinatra"
 
 module Ayashige
   class Application < Sinatra::Base
+
+    use Rollbar::Middleware::Sinatra
+
     configure do
       set :root, File.dirname(__FILE__) + '/../..'
     end

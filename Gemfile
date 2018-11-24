@@ -9,10 +9,11 @@ gem "oga"
 gem "parallel"
 gem "public_suffix"
 gem "puma"
+gem "redis"
+gem "rollbar"
 gem "simpleidn"
 gem "sinatra-contrib"
 gem "sinatra"
-gem "redis"
 
 group :test, :development do
   gem 'coveralls', require: false
