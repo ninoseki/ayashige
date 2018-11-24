@@ -15,6 +15,10 @@ module Ayashige
       end
     end
 
+    def exists?(key)
+      @client.exists key
+    end
+
     def get(key)
       @client.smembers(key)
     end

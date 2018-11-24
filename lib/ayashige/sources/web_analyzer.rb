@@ -22,8 +22,17 @@ module Ayashige
         TLDS
       end
 
+      def already_stored?(date)
+        @store.exists? date
+      end
+
       def store_newly_registered_domains
         date = latest_indexed_date
+        if already_stored?(date)
+          puts "#{date} domains are already stored."
+          return
+        end
+
         Parallel.map(tlds) do |tld|
           index = 1
           while index < LIMIT
@@ -37,8 +46,8 @@ module Ayashige
               next unless domain.suspicious?
 
               @store.store updated, domain.to_s
+              puts "#{domain} is stored."
             end
-
             index += 1
           end
         end
