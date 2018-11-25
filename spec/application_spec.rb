@@ -31,7 +31,7 @@ RSpec.describe "Application" do
       expect(array).to be_a(Array)
       first = array.first
       expect(first["domain"]).to eq("paypal.pay.pay.com")
-      expect(first["created"]).to eq("2018-01-01")
+      expect(first["updated_on"]).to eq("2018-01-01")
       expect(first["score"]).to be_an(Integer)
     end
   end
