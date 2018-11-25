@@ -134,9 +134,13 @@ keywords:
   "suivi": 50
   "laposte": 50
   # JP specific
-  "sagawa": 50
   "docomo": 50
+  "rakuten": 50
+  "sagawa": 50
+  "saison": 50
+  "smbc": 50
   "softbank": 50
+  "ntt": 30
 
 tlds:
   - ".ga"
