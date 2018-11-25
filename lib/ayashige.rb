@@ -22,7 +22,6 @@ Rollbar.configure do |config|
   config.access_token = ENV["ROLLBAR_ACCESS_TOKEN"]
 end
 
-
 module Ayashige
   class Error < StandardError; end
 end
