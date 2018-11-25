@@ -5,7 +5,6 @@ require "rollbar/middleware/sinatra"
 
 module Ayashige
   class Application < Sinatra::Base
-
     use Rollbar::Middleware::Sinatra
 
     configure do
@@ -21,13 +20,13 @@ module Ayashige
 
       array = []
       data = Store.all
-      data.each do |key, values|
-        values.each do |value|
-          domain = Domain.new(value)
+      data.each do |updated_on, domains|
+        domains.each do |name|
+          domain = Domain.new(name)
           array << {
             domain: domain.to_s,
             score: domain.score,
-            created: key
+            updated_on: updated_on
           }
         end
       end
