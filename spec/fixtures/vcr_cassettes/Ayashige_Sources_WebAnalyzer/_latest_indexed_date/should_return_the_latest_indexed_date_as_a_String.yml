@@ -25,13 +25,13 @@ http_interactions:
       Server:
       - Microsoft-IIS/8.0
       Set-Cookie:
-      - ASP.NET_SessionId=z5vehqnkqzvkvousolsf4kjo; path=/; HttpOnly
+      - ASP.NET_SessionId=4kmt5lqjtc05l2gck0apt0wj; path=/; HttpOnly
       X-Aspnet-Version:
       - 4.0.30319
       X-Powered-By:
       - ASP.NET
       Date:
-      - Sat, 24 Nov 2018 01:57:45 GMT
+      - Sun, 25 Nov 2018 07:35:56 GMT
       Connection:
       - close
       Content-Length:
@@ -67,7 +67,7 @@ http_interactions:
         \                   rotation: 45,\r\n                    style: {\r\n                        color:
         '#333',\r\n                        font: '10px Verdana,Arial,Helvetica,sans-serif',\r\n
         \                   }\r\n                },\r\n                categories:
-        ['2018-10-25','2018-10-26','2018-10-27','2018-10-28','2018-10-29','2018-10-30','2018-10-31','2018-11-01','2018-11-02','2018-11-03','2018-11-04','2018-11-05','2018-11-06','2018-11-07','2018-11-08','2018-11-09','2018-11-10','2018-11-11','2018-11-12','2018-11-13','2018-11-14','2018-11-15','2018-11-16','2018-11-17','2018-11-18','2018-11-19','2018-11-20','2018-11-21','2018-11-22','2018-11-23','2018-11-24'
+        ['2018-10-26','2018-10-27','2018-10-28','2018-10-29','2018-10-30','2018-10-31','2018-11-01','2018-11-02','2018-11-03','2018-11-04','2018-11-05','2018-11-06','2018-11-07','2018-11-08','2018-11-09','2018-11-10','2018-11-11','2018-11-12','2018-11-13','2018-11-14','2018-11-15','2018-11-16','2018-11-17','2018-11-18','2018-11-19','2018-11-20','2018-11-21','2018-11-22','2018-11-23','2018-11-24','2018-11-25'
         ]\r\n                },\r\n        yAxis: {\r\n            gridLineColor:
         '#eeeeee',\r\n            title: {\r\n                    text: 'Count'\r\n
         \           },\r\n            plotLines: [{\r\n                value: 0,\r\n
@@ -80,7 +80,7 @@ http_interactions:
         00,\r\n            borderWidth: 0\r\n        },\r\n        series: [\r\n            \r\n
         \                       \r\n                        {\r\n                            color:'#006400',\r\n
         \                           name: 'New Domains',\r\n                            data:
-        [178293,167026,127415,137532,136735,160600,155267,1219919,195340,165841,256329,286722,166446,171853,150672,123939,105113,133865,184760,169582,161355]\r\n
+        [167026,127415,137532,136735,160600,155267,1219919,195340,165841,256329,286722,166446,171853,150672,123939,105113,133865,184760,169582,161355,136413]\r\n
         \                       },\r\n                        \r\n    ]\r\n        });\r\n
         \       \r\n\r\n        //---deleted domains\r\n        chart2 = new Highcharts.Chart({\r\n
         \           chart: {\r\n                renderTo: 'containerGraphicNewDomainsByDate2',\r\n
@@ -94,7 +94,7 @@ http_interactions:
         \                   x:15,\r\n                    rotation: 45,\r\n                    style:
         {\r\n                        color: '#333',\r\n                        font:
         '10px Verdana,Arial,Helvetica,sans-serif',\r\n                    }\r\n                },\r\n
-        \               categories: ['2018-10-25','2018-10-26','2018-10-27','2018-10-28','2018-10-29','2018-10-30','2018-10-31','2018-11-01','2018-11-02','2018-11-03','2018-11-04','2018-11-05','2018-11-06','2018-11-07','2018-11-08','2018-11-09','2018-11-10','2018-11-11','2018-11-12','2018-11-13','2018-11-14','2018-11-15','2018-11-16','2018-11-17','2018-11-18','2018-11-19','2018-11-20','2018-11-21','2018-11-22','2018-11-23','2018-11-24'
+        \               categories: ['2018-10-26','2018-10-27','2018-10-28','2018-10-29','2018-10-30','2018-10-31','2018-11-01','2018-11-02','2018-11-03','2018-11-04','2018-11-05','2018-11-06','2018-11-07','2018-11-08','2018-11-09','2018-11-10','2018-11-11','2018-11-12','2018-11-13','2018-11-14','2018-11-15','2018-11-16','2018-11-17','2018-11-18','2018-11-19','2018-11-20','2018-11-21','2018-11-22','2018-11-23','2018-11-24','2018-11-25'
         ]\r\n                },\r\n                    yAxis: {\r\n                        gridLineColor:
         '#eeeeee',\r\n            title: {\r\n                                text:
         'Count'\r\n            },\r\n                        plotLines: [{\r\n                            value:
@@ -108,7 +108,7 @@ http_interactions:
         0,\r\n            enabled: false\r\n\r\n        },\r\n        series: [\r\n
         \           \r\n                        \r\n                        {\r\n
         \                           color: '#DC143C',\r\n                            name:
-        'Deleted Domains',\r\n                            data: [151034,129429,150408,124522,124130,143248,203826,1131114,272968,124261,159907,140355,179632,155249,138771,137033,123794,125539,140205,174730,138444]\r\n
+        'Deleted Domains',\r\n                            data: [129429,150408,124522,124130,143248,203826,1131114,272968,124261,159907,140355,179632,155249,138771,137033,123794,125539,140205,174730,138444,152387]\r\n
         \                       },\r\n                        \r\n            ]\r\n
         \           });\r\n        //---end deleted\r\n    });\r\n    \r\n});\r\n
         \   </script>\r\n\r\n    <script async=\"async\" type=\"text/javascript\"
@@ -289,6 +289,96 @@ http_interactions:
         Created Domains by TLD</h2></div>\r\n            <div  style=\"border-right:
         1px solid #eee;\">\r\n            <table class=\"domains_activity new_domains\">\r\n
         \                   \r\n                    <tbody>\r\n                        \r\n
+        \                               <tr>\r\n                                    <td>\r\n
+        \                                       <div>\r\n                                        <span>\r\n
+        \                                           \r\n                                                <span
+        class=\"date\">Updated : <time datetime=\"2018-11-23\">2018-11-23</time></span>
+        \r\n                                           \r\n                                            <span
+        style=\"color: #777;\"> &nbsp; </span><span class=\"\">136,413 new created
+        domains : \r\n                                                </span>\r\n
+        \                                           \r\n                                        </span>\r\n
+        \                                       <span style=\"margin-left: 2px;\">
+        \r\n                                            \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/com\" class=\"nu\">com</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/net\" class=\"nu\">net</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/org\" class=\"nu\">org</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/info\" class=\"nu\">info</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/us\" class=\"nu\">us</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/bid\" class=\"nu\">bid</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/biz\" class=\"nu\">biz</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/cat\" class=\"nu\">cat</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/club\" class=\"nu\">club</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/download\" class=\"nu\">download</a>\r\n
+        \                                                   </span>\r\n                                                \r\n
+        \                                                   <span class=\"under\"
+        style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/life\" class=\"nu\">life</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/live\" class=\"nu\">live</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/ltd\" class=\"nu\">ltd</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/men\" class=\"nu\">men</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/pro\" class=\"nu\">pro</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/review\" class=\"nu\">review</a>\r\n
+        \                                                   </span>\r\n                                                \r\n
+        \                                                   <span class=\"under\"
+        style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/shop\" class=\"nu\">shop</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/stream\" class=\"nu\">stream</a>\r\n
+        \                                                   </span>\r\n                                                \r\n
+        \                                                   <span class=\"under\"
+        style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/tech\" class=\"nu\">tech</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/today\" class=\"nu\">today</a>\r\n
+        \                                                   </span>\r\n                                                \r\n
+        \                                                   <span class=\"under\"
+        style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/trade\" class=\"nu\">trade</a>\r\n
+        \                                                   </span>\r\n                                                \r\n
+        \                                                   <span class=\"under\"
+        style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/win\" class=\"nu\">win</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                                    <span
+        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/world\" class=\"nu\">world</a>\r\n
+        \                                                   </span>\r\n                                                \r\n
+        \                                                   <span class=\"under\"
+        style=\"margin-left: 2px;\">\r\n                                                        <a
+        href=\"/2018-11-23/new-created-domains/xyz\" class=\"nu\">xyz</a>\r\n                                                    </span>\r\n
+        \                                               \r\n                                        </span>
+        \r\n                                         </div>\r\n                                    </td>\r\n
+        \                               </tr>                            \r\n                            \r\n
         \                               <tr>\r\n                                    <td>\r\n
         \                                       <div>\r\n                                        <span>\r\n
         \                                           \r\n                                                <span
@@ -908,96 +998,6 @@ http_interactions:
         \                                               \r\n                                        </span>
         \r\n                                         </div>\r\n                                    </td>\r\n
         \                               </tr>                            \r\n                            \r\n
-        \                               <tr>\r\n                                    <td>\r\n
-        \                                       <div>\r\n                                        <span>\r\n
-        \                                           \r\n                                                <span
-        class=\"date\">Updated : <time datetime=\"2018-11-15\">2018-11-15</time></span>
-        \r\n                                           \r\n                                            <span
-        style=\"color: #777;\"> &nbsp; </span><span class=\"\">171,853 new created
-        domains : \r\n                                                </span>\r\n
-        \                                           \r\n                                        </span>\r\n
-        \                                       <span style=\"margin-left: 2px;\">
-        \r\n                                            \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/com\" class=\"nu\">com</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/net\" class=\"nu\">net</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/org\" class=\"nu\">org</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/info\" class=\"nu\">info</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/us\" class=\"nu\">us</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/bid\" class=\"nu\">bid</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/biz\" class=\"nu\">biz</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/cat\" class=\"nu\">cat</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/club\" class=\"nu\">club</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/download\" class=\"nu\">download</a>\r\n
-        \                                                   </span>\r\n                                                \r\n
-        \                                                   <span class=\"under\"
-        style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/life\" class=\"nu\">life</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/live\" class=\"nu\">live</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/ltd\" class=\"nu\">ltd</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/men\" class=\"nu\">men</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/pro\" class=\"nu\">pro</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/review\" class=\"nu\">review</a>\r\n
-        \                                                   </span>\r\n                                                \r\n
-        \                                                   <span class=\"under\"
-        style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/shop\" class=\"nu\">shop</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/stream\" class=\"nu\">stream</a>\r\n
-        \                                                   </span>\r\n                                                \r\n
-        \                                                   <span class=\"under\"
-        style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/tech\" class=\"nu\">tech</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/today\" class=\"nu\">today</a>\r\n
-        \                                                   </span>\r\n                                                \r\n
-        \                                                   <span class=\"under\"
-        style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/trade\" class=\"nu\">trade</a>\r\n
-        \                                                   </span>\r\n                                                \r\n
-        \                                                   <span class=\"under\"
-        style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/win\" class=\"nu\">win</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                                    <span
-        class=\"under\" style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/world\" class=\"nu\">world</a>\r\n
-        \                                                   </span>\r\n                                                \r\n
-        \                                                   <span class=\"under\"
-        style=\"margin-left: 2px;\">\r\n                                                        <a
-        href=\"/2018-11-15/new-created-domains/xyz\" class=\"nu\">xyz</a>\r\n                                                    </span>\r\n
-        \                                               \r\n                                        </span>
-        \r\n                                         </div>\r\n                                    </td>\r\n
-        \                               </tr>                            \r\n                            \r\n
         \                   </tbody>\r\n                </table>\r\n\r\n            </div>\r\n
         \       </div>\r\n        \r\n\r\n    <div class=\"clear\"></div>\r\n\r\n\r\n
         \   <div class=\"col-lg-12 nopadding\" style=\"height: 10px;padding-bottom:
@@ -1176,5 +1176,5 @@ http_interactions:
         \    \r\n                \r\n                 &copy; WebAnalyzer\r\n                </small>\r\n
         \           </div>\r\n        \r\n        </div>\r\n\r\n\r\n    </form>\r\n\r\n</body>\r\n</html>\r\n"
     http_version: 
-  recorded_at: Sat, 24 Nov 2018 01:57:43 GMT
+  recorded_at: Sun, 25 Nov 2018 07:35:54 GMT
 recorded_with: VCR 4.0.0

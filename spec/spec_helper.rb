@@ -21,6 +21,12 @@ RSpec.configure do |config|
   end
 end
 
+require_relative "./support/helpers/io_helper"
+
+RSpec.configure do |config|
+  config.include Spec::Support::IOHelper
+end
+
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.configure_rspec_metadata!
