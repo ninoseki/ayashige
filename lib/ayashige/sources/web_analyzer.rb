@@ -18,10 +18,6 @@ module Ayashige
         @store = Store.new
       end
 
-      def tlds
-        TLDS
-      end
-
       def already_stored?(date)
         @store.exists? date
       end
@@ -29,11 +25,11 @@ module Ayashige
       def store_newly_registered_domains
         date = latest_indexed_date
         if already_stored?(date)
-          puts "#{date} domains are already stored."
+          puts "domains which updated on #{date} are already stored."
           return
         end
 
-        Parallel.map(tlds) do |tld|
+        Parallel.each(TLDS) do |tld|
           index = 1
           while index < LIMIT
             page = get_page(date, tld, index)

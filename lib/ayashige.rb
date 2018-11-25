@@ -16,7 +16,6 @@ require "ayashige/application"
 require "ayashige/jobs/cron_job"
 
 require "rollbar"
-require "dotenv/load"
 
 Rollbar.configure do |config|
   config.access_token = ENV["ROLLBAR_ACCESS_TOKEN"]
