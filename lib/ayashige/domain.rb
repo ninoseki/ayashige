@@ -59,7 +59,7 @@ module Ayashige
     end
 
     def suspicious
-      @suspicious ||= YAML.load_file File.expand_path("./config/suspicious.yml", __dir__)
+      @suspicious ||= YAML.safe_load File.read(File.expand_path("./config/suspicious.yml", __dir__))
     end
 
     def suspicious_keywords
