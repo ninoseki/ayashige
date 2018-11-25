@@ -18,6 +18,7 @@ gem "sinatra"
 group :test, :development do
   gem 'coveralls', require: false
   gem "foreman"
+  gem "mock_redis"
   gem "rack-test"
   gem "rake"
   gem "rspec"
