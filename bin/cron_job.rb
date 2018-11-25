@@ -6,5 +6,9 @@ begin
   job = Ayashige::Jobs::CronJob.new
   job.perform
 rescue StandardError => e
-  Rollbar.error e
+  if Ayashige::Rollbar.available?
+    Rollbar.error e
+  else
+    puts e
+  end
 end

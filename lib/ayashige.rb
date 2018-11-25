@@ -11,14 +11,18 @@ require "ayashige/store"
 
 require "ayashige/sources/web_analyzer"
 
+require "ayashige/rollbar"
+
 require "ayashige/application"
 
 require "ayashige/jobs/cron_job"
 
 require "rollbar"
 
-Rollbar.configure do |config|
-  config.access_token = ENV["ROLLBAR_ACCESS_TOKEN"]
+if Ayashige::Rollbar.available?
+  Rollbar.configure do |config|
+    config.access_token = ENV["ROLLBAR_ACCESS_TOKEN"]
+  end
 end
 
 module Ayashige

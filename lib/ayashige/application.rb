@@ -5,7 +5,7 @@ require "rollbar/middleware/sinatra"
 
 module Ayashige
   class Application < Sinatra::Base
-    use Rollbar::Middleware::Sinatra
+    use ::Rollbar::Middleware::Sinatra if Ayashige::Rollbar.available?
 
     configure do
       set :root, File.dirname(__FILE__) + '/../..'
