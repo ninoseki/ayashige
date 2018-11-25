@@ -30,7 +30,10 @@ module Ayashige
           }
         end
       end
-      array.to_json
+
+      array.sort_by do |item|
+        [item[:updated_on], item[:domain]]
+      end.to_json
     end
   end
 end
