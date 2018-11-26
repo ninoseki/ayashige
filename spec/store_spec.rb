@@ -17,18 +17,19 @@ RSpec.describe Ayashige::Store do
 
   describe "#store" do
     it "should store arguments as a Set" do
-      subject.store "2018-01-01", "test.com"
-      expect(redis.smembers("2018-01-01")).to eq(["test.com"])
-      subject.store "2018-01-01", "test2.com"
-      expect(redis.smembers("2018-01-01")).to eq(["test2.com", "test.com"])
+      subject.store "2018-01-01", "test.com", 80
+      expect(redis.hgetall("2018-01-01")).to eq("test.com" => "80")
     end
   end
 
   describe "#get" do
     it "should return a Set value" do
-      redis.sadd "2018-01-01", "test.com"
-      redis.sadd "2018-01-01", "test2.com"
-      expect(subject.get("2018-01-01")).to eq(["test2.com", "test.com"])
+      redis.hset "2018-01-01", "test.com", 80
+      redis.hset "2018-01-01", "test2.com", 80
+      expect(subject.get("2018-01-01")).to eq(
+        "test.com" => "80",
+        "test2.com" => "80"
+      )
     end
   end
 
@@ -44,13 +45,13 @@ RSpec.describe Ayashige::Store do
 
   describe "#all" do
     before do
-      redis.sadd "2018-01-01", "test.com"
-      redis.sadd "2018-01-02", "test2.com"
+      redis.hset "2018-01-01", "test.com", 80
+      redis.hset "2018-01-02", "test2.com", 80
     end
     it "should return all data as a Hash" do
       expect(subject.all).to eq(
-        "2018-01-01" => ["test.com"],
-        "2018-01-02" => ["test2.com"]
+        "2018-01-01" => { "test.com" => "80" },
+        "2018-01-02" => { "test2.com" => "80" }
       )
     end
   end

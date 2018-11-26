@@ -20,9 +20,18 @@ RSpec.describe "Application" do
   describe "GET /feed" do
     before do
       allow(Ayashige::Store).to receive(:all).and_return(
-        "2018-02-01": ["paypal.pay.pay.com", "google.apple.microsoft.com"],
-        "2018-01-01": ["paypal.pay.pay.com", "google.apple.microsoft.com"],
-        "2018-03-01": ["paypal.pay.pay.com", "google.apple.microsoft.com"]
+        "2018-02-01" => {
+          "paypal.pay.pay.com" => 80,
+          "google.apple.microsoft.com" => 80
+        },
+        "2018-01-01" => {
+          "paypal.pay.pay.com" => 80,
+          "google.apple.microsoft.com" => 80
+        },
+        "2018-03-01" => {
+          "paypal.pay.pay.com" => 80,
+          "google.apple.microsoft.com" => 80
+        }
       )
     end
 

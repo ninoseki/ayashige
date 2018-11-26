@@ -19,14 +19,13 @@ module Ayashige
       content_type :json
 
       array = []
-      data = Store.all
-      data.each do |updated_on, domains|
-        domains.each do |name|
-          domain = Domain.new(name)
+      hash = Store.all
+      hash.keys.each do |updated_on|
+        hash[updated_on].keys.each do |domain|
           array << {
-            domain: domain.to_s,
-            score: domain.score,
-            updated_on: updated_on
+            updated_on: updated_on,
+            domain: domain,
+            score: hash.dig(updated_on, domain).to_i
           }
         end
       end

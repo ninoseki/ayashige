@@ -3,15 +3,17 @@
 require "json"
 
 module Ayashige
+  DEFAULT_TTL = 60 * 60 * 48
+
   class Store
     def initialize
       @client = Redis.client
     end
 
-    def store(updated, domain)
+    def store(key, field, value)
       @client.multi do
-        @client.sadd updated, domain.to_s
-        @client.expire updated, 60 * 60 * 48
+        @client.hset key, field, value
+        @client.expire key, DEFAULT_TTL
       end
     end
 
@@ -20,7 +22,7 @@ module Ayashige
     end
 
     def get(key)
-      @client.smembers(key)
+      @client.hgetall key
     end
 
     def keys
