@@ -36,12 +36,12 @@ module Ayashige
             domains = get_domains_from_doc(page)
             break if domains.empty?
 
-            domains.each do |elem|
-              domain = Domain.new(elem[:domain])
-              updated = elem[:updated]
+            domains.each do |domain|
+              updated = domain[:updated]
+              domain = Domain.new(domain[:domain])
               next unless domain.suspicious?
 
-              @store.store updated, domain.to_s
+              @store.store updated, domain.to_s, domain.score
               puts "#{domain} is stored."
             end
             index += 1
