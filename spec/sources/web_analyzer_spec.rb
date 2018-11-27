@@ -15,20 +15,6 @@ RSpec.describe Ayashige::Sources::WebAnalyzer, :vcr do
     redis.flushdb
   end
 
-  describe "#already_stored?" do
-    context "when already stored" do
-      before { redis.set "2018-01-01", "set" }
-      it "should return true" do
-        expect(subject.already_stored?("2018-01-01")).to eq(true)
-      end
-    end
-    context "when not already stored" do
-      it "should return false" do
-        expect(subject.already_stored?("2018-01-01")).to eq(false)
-      end
-    end
-  end
-
   describe "#latest_indexed_date" do
     it "should return the latest indexed date as a String" do
       expect(subject.latest_indexed_date).to be_a(String)

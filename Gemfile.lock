@@ -78,6 +78,7 @@ GEM
     ruby-ll (2.1.2)
       ansi
       ast
+    rubyzip (1.2.2)
     safe_yaml (1.0.4)
     simplecov (0.16.1)
       docile (~> 1.1)
@@ -135,6 +136,7 @@ DEPENDENCIES
   redis
   rollbar
   rspec
+  rubyzip
   simpleidn
   sinatra
   sinatra-contrib
