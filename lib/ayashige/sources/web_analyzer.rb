@@ -18,16 +18,8 @@ module Ayashige
         @store = Store.new
       end
 
-      def already_stored?(date)
-        @store.exists? date
-      end
-
       def store_newly_registered_domains
         date = latest_indexed_date
-        if already_stored?(date)
-          puts "domains which updated on #{date} are already stored."
-          return
-        end
 
         Parallel.each(TLDS) do |tld|
           index = 1
