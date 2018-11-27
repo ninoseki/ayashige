@@ -9,13 +9,13 @@ require "ayashige/redis"
 
 require "ayashige/store"
 
+require "ayashige/sources/source"
 require "ayashige/sources/web_analyzer"
+require "ayashige/sources/whoisds"
 
 require "ayashige/rollbar"
 
 require "ayashige/application"
-
-require "ayashige/jobs/cron_job"
 
 require "rollbar"
 

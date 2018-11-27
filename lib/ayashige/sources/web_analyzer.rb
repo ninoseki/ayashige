@@ -1,22 +1,16 @@
 # frozen_string_literal: true
 
-require "http"
 require "json"
-require "oga"
 require "uri"
 require "simpleidn"
 require "parallel"
 
 module Ayashige
   module Sources
-    class WebAnalyzer
+    class WebAnalyzer < Source
       BASE_URL = "https://wa-com.com"
       TLDS = %w(com net org info us bid biz cat club download life live ltd men pro review shop stream tech today trade win world xyz).freeze
       LIMIT = 5_000
-
-      def initialize
-        @store = Store.new
-      end
 
       def store_newly_registered_domains
         date = latest_indexed_date
@@ -34,7 +28,7 @@ module Ayashige
               next unless domain.suspicious?
 
               @store.store updated, domain.to_s, domain.score
-              puts "#{domain} is stored."
+              puts "WebAnalyzer: #{domain} is stored."
             end
             index += 1
           end
@@ -77,12 +71,6 @@ module Ayashige
           time = doc.css("#form1 > div.container.mt30 > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(1) > td > div > span:nth-child(1) > span.date > time")
           out << time.text
         end.first
-      end
-
-      def html2doc(html)
-        Oga.parse_html html
-      rescue StandardError => _
-        nil
       end
     end
   end
