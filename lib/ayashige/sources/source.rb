@@ -21,7 +21,7 @@ module Ayashige
         return unless domain.suspicious?
 
         @store.store updated_on, domain.to_s, domain.score
-        puts "#{self.class.to_s}: #{domain} is stored."
+        puts "#{self.class}: #{domain} is stored."
       rescue ArgumentError => e
         puts e
       end
