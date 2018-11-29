@@ -16,6 +16,16 @@ module Ayashige
 
       private
 
+      def store_domain(updated_on, domain)
+        domain = Domain.new(domain)
+        return unless domain.suspicious?
+
+        @store.store updated_on, domain.to_s, domain.score
+        puts "#{self.class.to_s}: #{domain} is stored."
+      rescue ArgumentError => e
+        puts e
+      end
+
       def html2doc(html)
         Oga.parse_html html
       rescue StandardError => _

@@ -13,11 +13,7 @@ module Ayashige
         lines = unzip(res.body.to_s)
 
         lines.each do |line|
-          domain = Domain.new(line)
-          next unless domain.suspicious?
-
-          @store.store date, domain.to_s, domain.score
-          puts "WhoisDS: #{domain} is stored."
+          store_domain date, line
         end
       end
 

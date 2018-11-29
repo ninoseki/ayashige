@@ -24,11 +24,8 @@ module Ayashige
 
             domains.each do |domain|
               updated = domain[:updated]
-              domain = Domain.new(domain[:domain])
-              next unless domain.suspicious?
-
-              @store.store updated, domain.to_s, domain.score
-              puts "WebAnalyzer: #{domain} is stored."
+              domain = domain[:domain]
+              store_domain updated, domain
             end
             index += 1
           end
