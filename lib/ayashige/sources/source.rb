@@ -2,6 +2,7 @@
 
 require "http"
 require "oga"
+require "date"
 
 module Ayashige
   module Sources
@@ -20,10 +21,15 @@ module Ayashige
         domain = Domain.new(domain)
         return unless domain.suspicious?
 
-        @store.store updated_on, domain.to_s, domain.score
+        @store.store normalize_date(updated_on), domain.to_s, domain.score
         puts "#{self.class}: #{domain} is stored."
       rescue ArgumentError => e
         puts e
+      end
+
+      def normalize_date(date)
+        d = Date.parse(date)
+        d.strftime "%Y-%m-%d"
       end
 
       def html2doc(html)
