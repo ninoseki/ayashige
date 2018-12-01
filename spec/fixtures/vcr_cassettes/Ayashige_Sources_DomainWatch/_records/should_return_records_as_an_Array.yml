@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://domainwat.ch/api/search?query=*&type=string
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Connection:
+      - close
+      Host:
+      - domainwat.ch
+      User-Agent:
+      - http.rb/4.0.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 01 Dec 2018 01:52:19 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Set-Cookie:
+      - __cfduid=df891278229ad01e5a9eb3685265d034f1543629136; expires=Sun, 01-Dec-19
+        01:52:16 GMT; path=/; domain=.domainwat.ch; HttpOnly; Secure
+      Cache-Control:
+      - no-cache, private
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '59'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4821e9d46d1fa518-NRT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"status":"ok","records":[{"domain":"monerotan.com","added_at":"2018-12-01
+        01:52:16"},{"domain":"applerepaircentreindelhi.com","added_at":"2018-12-01
+        01:52:12"},{"domain":"ff14antenna.info","added_at":"2018-12-01 01:52:07"},{"domain":"generateinvoice.xyz","added_at":"2018-12-01
+        01:52:04"},{"domain":"poshsurfside.com","added_at":"2018-12-01 01:52:04"},{"domain":"lesgoonies-ark.fr","added_at":"2018-12-01
+        01:51:01"},{"domain":"peace-landtravel.com","added_at":"2018-12-01 01:50:56"},{"domain":"workfromhomesystem.top","added_at":"2018-12-01
+        01:50:55"},{"domain":"miaminewtimes.com","added_at":"2018-12-01 01:50:44"},{"domain":"ultrabac.com","added_at":"2018-12-01
+        01:50:20"},{"domain":"nordicpride.com","added_at":"2018-12-01 01:50:17"},{"domain":"panouinformare.ro","added_at":"2018-12-01
+        01:50:17"},{"domain":"wilmington-financial.com","added_at":"2018-12-01 01:49:31"},{"domain":"heuer-und-sack.de","added_at":"2018-12-01
+        01:49:24"},{"domain":"tadjweed.com","added_at":"2018-12-01 01:49:11"},{"domain":"jncp.fr","added_at":"2018-12-01
+        01:49:01"},{"domain":"nzonlinecasino.com","added_at":"2018-12-01 01:48:59"},{"domain":"inservicemarket.com","added_at":"2018-12-01
+        01:48:58"},{"domain":"tennis-lesson.org","added_at":"2018-12-01 01:48:57"},{"domain":"medellinnsserver.info","added_at":"2018-12-01
+        01:48:55"},{"domain":"p1tp.com","added_at":"2018-12-01 01:47:48"},{"domain":"emshort.blog","added_at":"2018-12-01
+        01:45:37"},{"domain":"awesome-hd.me","added_at":"2018-12-01 01:45:35"},{"domain":"xzqinfo.com","added_at":"2018-12-01
+        01:45:33"},{"domain":"rhymexclusive.com","added_at":"2018-12-01 01:45:30"},{"domain":"onworkss.com","added_at":"2018-12-01
+        01:45:27"},{"domain":"enchereslive.fr","added_at":"2018-12-01 01:45:20"},{"domain":"phantasypunk.com","added_at":"2018-12-01
+        01:45:08"},{"domain":"americandropbox.com","added_at":"2018-12-01 01:45:07"},{"domain":"stanleytaylorconstruction.co.uk","added_at":"2018-12-01
+        01:45:04"},{"domain":"dstg-jugend-sachsen.de","added_at":"2018-12-01 01:45:03"},{"domain":"schulportal-thueringen.de","added_at":"2018-12-01
+        01:44:59"},{"domain":"itmf.net","added_at":"2018-12-01 01:44:45"},{"domain":"nyclactationservice.com","added_at":"2018-12-01
+        01:44:43"},{"domain":"domainsupportservices.com","added_at":"2018-12-01 01:44:37"},{"domain":"solutions-cleaning-service.com","added_at":"2018-12-01
+        01:44:36"},{"domain":"drumcircuit.com","added_at":"2018-12-01 01:44:15"},{"domain":"solution-business-formation.com","added_at":"2018-12-01
+        01:44:09"},{"domain":"customassignmentservice.com","added_at":"2018-12-01
+        01:44:07"},{"domain":"brookcliff.org","added_at":"2018-12-01 01:44:02"},{"domain":"gartenbau-schueler.de","added_at":"2018-12-01
+        01:43:29"},{"domain":"northernnorway.com","added_at":"2018-12-01 01:43:17"},{"domain":"rturnto.org","added_at":"2018-12-01
+        01:42:17"},{"domain":"c53xg.com","added_at":"2018-12-01 01:40:55"},{"domain":"4ga.pl","added_at":"2018-12-01
+        01:40:53"},{"domain":"svfashionaccessories.com","added_at":"2018-12-01 01:40:51"},{"domain":"erinreiners.com","added_at":"2018-12-01
+        01:40:47"},{"domain":"sunrisegames.co.uk","added_at":"2018-12-01 01:40:45"},{"domain":"cloudhud.de","added_at":"2018-12-01
+        01:40:41"},{"domain":"rgouvertures.com","added_at":"2018-12-01 01:40:39"},{"domain":"westkowloon.hk","added_at":"2018-12-01
+        01:40:37"},{"domain":"astrosoinedvie.com","added_at":"2018-12-01 01:40:36"},{"domain":"format-ekb.ru","added_at":"2018-12-01
+        01:40:35"},{"domain":"phoenixnewtimes.com","added_at":"2018-12-01 01:40:35"},{"domain":"xh-shbd.com","added_at":"2018-12-01
+        01:40:32"},{"domain":"ihottsca.com","added_at":"2018-12-01 01:40:32"},{"domain":"monarchparis.com","added_at":"2018-12-01
+        01:40:28"},{"domain":"chronologia.org","added_at":"2018-12-01 01:40:27"},{"domain":"895754.com","added_at":"2018-12-01
+        01:40:25"},{"domain":"bodoi.info","added_at":"2018-12-01 01:40:24"},{"domain":"dimargoapartments.com","added_at":"2018-12-01
+        01:40:21"},{"domain":"dedicatedbee.com","added_at":"2018-12-01 01:40:19"},{"domain":"wingirl-travel.com","added_at":"2018-12-01
+        01:40:16"},{"domain":"huseyinadna.com","added_at":"2018-12-01 01:40:14"},{"domain":"kohkjong.com","added_at":"2018-12-01
+        01:40:14"},{"domain":"lacroce.com.br","added_at":"2018-12-01 01:40:11"},{"domain":"dizzyledger.com","added_at":"2018-12-01
+        01:40:11"},{"domain":"marcuskarth.com","added_at":"2018-12-01 01:40:09"},{"domain":"offlang.com","added_at":"2018-12-01
+        01:40:08"},{"domain":"spyus.org","added_at":"2018-12-01 01:39:20"},{"domain":"hpaccounting.com","added_at":"2018-12-01
+        01:38:22"},{"domain":"supportcenter48.com","added_at":"2018-12-01 01:38:09"},{"domain":"safeparty.de","added_at":"2018-12-01
+        01:38:09"},{"domain":"csonline.nl","added_at":"2018-12-01 01:38:06"},{"domain":"bitrealcoin.net","added_at":"2018-12-01
+        01:38:04"},{"domain":"whatakuai.com","added_at":"2018-12-01 01:38:00"},{"domain":"saonesecurity.com","added_at":"2018-12-01
+        01:37:58"},{"domain":"vega-online.ru","added_at":"2018-12-01 01:37:57"},{"domain":"promenu.ua","added_at":"2018-12-01
+        01:37:56"},{"domain":"lonnieloveonline.com","added_at":"2018-12-01 01:37:51"},{"domain":"entendiendolostiempos.org","added_at":"2018-12-01
+        01:37:50"},{"domain":"giteocoin.com","added_at":"2018-12-01 01:37:43"},{"domain":"dailyforme.com","added_at":"2018-12-01
+        01:37:41"},{"domain":"premier-building-services.co.uk","added_at":"2018-12-01
+        01:37:36"},{"domain":"securepubtrack.com","added_at":"2018-12-01 01:37:28"},{"domain":"kepayonline.com","added_at":"2018-12-01
+        01:37:27"},{"domain":"php-staging.com","added_at":"2018-12-01 01:37:25"},{"domain":"archconproject.bg","added_at":"2018-12-01
+        01:37:23"},{"domain":"ttisif.fr","added_at":"2018-12-01 01:37:20"},{"domain":"lycophron.com","added_at":"2018-12-01
+        01:37:18"},{"domain":"the50kformula.co.uk","added_at":"2018-12-01 01:37:15"},{"domain":"kreditvsemonline.ru","added_at":"2018-12-01
+        01:37:14"},{"domain":"rightclickcomputerservices.com","added_at":"2018-12-01
+        01:37:05"},{"domain":"ninjacursosonline.com.br","added_at":"2018-12-01 01:37:04"},{"domain":"melbourneprepurchase.net.au","added_at":"2018-12-01
+        01:37:03"},{"domain":"onlinesistemas.net.br","added_at":"2018-12-01 01:37:01"},{"domain":"plateformehaiti.be","added_at":"2018-12-01
+        01:37:00"},{"domain":"campass.com.tw","added_at":"2018-12-01 01:36:59"},{"domain":"cycerooliveira.com.br","added_at":"2018-12-01
+        01:36:59"},{"domain":"starbrick37.com","added_at":"2018-12-01 01:36:53"}]}'
+    http_version: 
+  recorded_at: Sat, 01 Dec 2018 01:52:15 GMT
+recorded_with: VCR 4.0.0
