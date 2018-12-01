@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "set"
 require "sinatra/base"
 require "rollbar/middleware/sinatra"
 
@@ -19,9 +20,13 @@ module Ayashige
       content_type :json
 
       array = []
+      domains = Set.new
       hash = Store.all
-      hash.keys.each do |updated_on|
+      hash.keys.sort.each do |updated_on|
         hash[updated_on].keys.each do |domain|
+          next if domains.include? domain
+
+          domains << domain
           array << {
             updated_on: updated_on,
             domain: domain,
