@@ -35,7 +35,7 @@ RSpec.describe "Application" do
       )
     end
 
-    it "should return 200 OK" do
+    it "should return 200 OK and filter dupolicate domains" do
       get "/feed"
       expect(last_response).to be_ok
       array = JSON.parse(last_response.body.to_s)
@@ -48,7 +48,7 @@ RSpec.describe "Application" do
 
       last = array.last
       expect(last["domain"]).to eq("paypal.pay.pay.com")
-      expect(last["updated_on"]).to eq("2018-03-01")
+      expect(last["updated_on"]).to eq("2018-01-01")
       expect(last["score"]).to be_an(Integer)
     end
   end
