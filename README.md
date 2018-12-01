@@ -31,13 +31,14 @@ REDIS_PORT = YOUR_REDIS_PORT
 REDIS_PASSWORD = YOUR_REDIS_PASSWORD
 ```
 
-### Run a Cron job
+### Run Cron jobs
 
 ```sh
-bundle exec ruby bin/cron_job.rb
+bundle exec ruby bin/web_analyzer_job.rb
+bundle exec ruby bin/whoisds_job.rb
 ```
 
-- The job crawls WebAnalyzer websites and parsed the latest registered domains.
+- The jobs collects the latest registered domains from WebAnalyzer & WhoisDS.
 - It checks a suspicious score of a given each domain and stores a suspicious one into a Redis instance.
 
 ### Run a Web app

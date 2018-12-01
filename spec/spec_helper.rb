@@ -27,6 +27,12 @@ RSpec.configure do |config|
   config.include Spec::Support::IOHelper
 end
 
+require_relative "./support/shared_contexts/job_context"
+
+RSpec.configure do |rspec|
+  rspec.include_context "job context", include_shared: true
+end
+
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.configure_rspec_metadata!

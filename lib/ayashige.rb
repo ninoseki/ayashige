@@ -13,6 +13,10 @@ require "ayashige/sources/source"
 require "ayashige/sources/web_analyzer"
 require "ayashige/sources/whoisds"
 
+require "ayashige/jobs/job"
+require "ayashige/jobs/web_analyzer"
+require "ayashige/jobs/whoisds"
+
 require "ayashige/rollbar"
 
 require "ayashige/application"
