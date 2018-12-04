@@ -135,12 +135,16 @@ keywords:
   "laposte": 50
   # JP specific
   "docomo": 50
+  "jcb": 30
+  "mitsui": 50
+  "mufg": 50
+  "ntt": 30
   "rakuten": 50
   "sagawa": 50
   "saison": 50
   "smbc": 50
   "softbank": 50
-  "ntt": 30
+  "sumimoto": 50
 
 tlds:
   - ".ga"
