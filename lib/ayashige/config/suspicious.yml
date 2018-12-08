@@ -136,7 +136,9 @@ keywords:
   # JP specific
   "docomo": 50
   "jcb": 30
+  "jibun": 50
   "mitsui": 50
+  "mizuho": 50
   "mufg": 50
   "ntt": 30
   "rakuten": 50
@@ -145,6 +147,7 @@ keywords:
   "smbc": 50
   "softbank": 50
   "sumimoto": 50
+  "webmoney": 50
 
 tlds:
   - ".ga"
