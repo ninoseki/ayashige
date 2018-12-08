@@ -3,7 +3,7 @@
 require "json"
 
 module Ayashige
-  DEFAULT_TTL = 60 * 60 * 48
+  DEFAULT_TTL = 60 * 60 * 24
 
   class Store
     def initialize
