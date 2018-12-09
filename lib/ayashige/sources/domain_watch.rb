@@ -5,20 +5,38 @@ require "json"
 module Ayashige
   module Sources
     class DomainWatch < Source
-      BASE_URL = "https://domainwat.ch/api/search?type=string&query=*"
+      BASE_URL = "https://domainwat.ch/search"
+      LIMIT = 50
+      QUERY = "*"
+      TYPE = "string"
 
       def store_newly_registered_domains
-        records.each do |record|
-          store_domain record["added_at"], record["domain"]
+        Parallel.map(1..LIMIT) do |page|
+          doc = get_page(page)
+          domains = get_domains_from_doc(doc)
+          domains.each do |record|
+            store_domain record[:updated], record[:domain]
+          end
         end
       end
 
-      def records
-        res = HTTP.get(BASE_URL)
-        return [] unless res.code == 200
+      def get_page(page)
+        res = HTTP.get(BASE_URL, params:
+          {
+            page: page,
+            query: QUERY,
+            type: TYPE,
+          })
+        html2doc(res.body.to_s)
+      end
 
-        json = JSON.parse(res.body.to_s)
-        json["records"]
+      def get_domains_from_doc(doc)
+        doc.css("#app > div > div.row > div  > div > a > div").map do |record|
+          {
+            domain: record.at_css("h6").text,
+            updated: record.at_css("small").text
+          }
+        end
       end
     end
   end
