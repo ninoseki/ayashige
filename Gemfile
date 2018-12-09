@@ -14,7 +14,6 @@ gem "redis"
 gem "rollbar"
 gem "rubyzip"
 gem "simpleidn"
-gem "sinatra-contrib"
 gem "sinatra"
 
 group :test, :development do
