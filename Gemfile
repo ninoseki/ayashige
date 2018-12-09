@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "~> 2.5.0"
 
+gem "certificate-transparency-client"
 gem "dotenv"
 gem "http"
 gem "levenshtein-ffi"

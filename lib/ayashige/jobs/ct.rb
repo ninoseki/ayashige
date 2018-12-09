@@ -2,9 +2,9 @@
 
 module Ayashige
   module Jobs
-    class WhoisDS < Job
+    class CT < Job
       def initialize
-        @source = Ayashige::Sources::WhoisDS.new
+        @source = Ayashige::Sources::CT.new
       end
     end
   end

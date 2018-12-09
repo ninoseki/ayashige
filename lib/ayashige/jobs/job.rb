@@ -4,7 +4,7 @@ module Ayashige
   module Jobs
     class Job
       def perform
-        raise NotImplementedError, "You must implement #{self.class}##{__method__}"
+        with_error_handling { @source.store_newly_registered_domains }
       end
 
       def with_error_handling
