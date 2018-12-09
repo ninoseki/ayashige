@@ -10,7 +10,7 @@ module Ayashige
       def with_error_handling
         yield
       rescue StandardError => e
-        if Ayashige::Rollbar.available?
+        if Rollbar.available?
           Rollbar.error e
         else
           puts e
