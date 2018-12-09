@@ -19,14 +19,10 @@ module Ayashige
           index = 1
           while index < LIMIT
             page = get_page(date, tld, index)
-            domains = get_domains_from_doc(page)
-            break if domains.empty?
+            records = get_records_from_doc(page)
+            break if records.empty?
 
-            domains.each do |domain|
-              updated = domain[:updated]
-              domain = domain[:domain]
-              store_domain updated, domain
-            end
+            records.each { |record| store record }
             index += 1
           end
         end
@@ -46,16 +42,17 @@ module Ayashige
         end.compact
       end
 
-      def get_domains_from_doc(doc)
+      def get_records_from_doc(doc)
         rows = doc.css("#tblListDomain > tbody > tr")
         rows.map do |row|
           cols = row.css("td")
-          domain = cols[0].at_css("a > span > span").text
+          domain_name = cols[0].at_css("a > span > span").text
           updated = cols[1].at_css("span").text
-          {
-            domain: SimpleIDN.to_ascii(domain),
+
+          Record.new(
+            domain_name: SimpleIDN.to_ascii(domain_name),
             updated: updated
-          }
+          )
         end
       end
 

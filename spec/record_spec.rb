@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Ayashige::Sources::Source, :vcr do
-  subject { Ayashige::Sources::Source.new }
+RSpec.describe Ayashige::Record do
+  subject { Ayashige::Record.new(updated: "2018/01/01", domain_name: "test.com") }
 
-  describe "#normalize_date" do
+  describe "#updated_on" do
     context "when given a valid date" do
       it "should return %Y-%m-%d format string" do
         s = subject.send(:normalize_date, "2018/01/01")

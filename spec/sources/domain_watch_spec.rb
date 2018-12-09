@@ -15,15 +15,15 @@ RSpec.describe Ayashige::Sources::DomainWatch, :vcr do
     redis.flushdb
   end
 
-  describe "#get_domains_from_doc" do
+  describe "#get_records_from_doc" do
     it "should return domains in a page as an Array" do
       page = subject.get_page(1)
-      domains = subject.get_domains_from_doc(page)
+      records = subject.get_records_from_doc(page)
 
-      expect(domains.length).to eq(100)
-      domains.each do |domain|
-        expect(domain.key?(:domain)).to eq(true)
-        expect(domain.key?(:updated)).to eq(true)
+      expect(records.length).to eq(100)
+      records.each do |record|
+        expect(record.domain).to be_a(Ayashige::Domain)
+        expect(record.updated_on).to be_a(String)
       end
     end
   end
@@ -35,9 +35,11 @@ RSpec.describe Ayashige::Sources::DomainWatch, :vcr do
       stub_const("Ayashige::Sources::DomainWatch::LIMIT", 2)
 
       allow(subject).to receive(:get_page).and_return(nil)
-      allow(subject).to receive(:get_domains_from_doc).and_return([
-        { updated: updated_on, domain: "paypal.pay.pay.world" }
-      ])
+      allow(subject).to receive(:get_records_from_doc).and_return(
+        [
+          Ayashige::Record.new(updated: updated_on, domain_name: "paypal.pay.pay.world")
+        ]
+      )
       allow(Parallel).to receive(:map).with(1..2).and_yield([1, 2])
     end
 

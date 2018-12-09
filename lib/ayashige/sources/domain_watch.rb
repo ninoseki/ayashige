@@ -13,10 +13,8 @@ module Ayashige
       def store_newly_registered_domains
         Parallel.map(1..LIMIT) do |page|
           doc = get_page(page)
-          domains = get_domains_from_doc(doc)
-          domains.each do |record|
-            store_domain record[:updated], record[:domain]
-          end
+          records = get_records_from_doc(doc)
+          records.each { |record| store record }
         end
       end
 
@@ -30,12 +28,12 @@ module Ayashige
         html2doc(res.body.to_s)
       end
 
-      def get_domains_from_doc(doc)
+      def get_records_from_doc(doc)
         doc.css("#app > div > div.row > div  > div > a > div").map do |record|
-          {
-            domain: record.at_css("h6").text,
+          Record.new(
+            domain_name: record.at_css("h6").text,
             updated: record.at_css("small").text
-          }
+          )
         end
       end
     end

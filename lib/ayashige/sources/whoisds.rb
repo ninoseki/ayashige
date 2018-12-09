@@ -13,7 +13,8 @@ module Ayashige
         lines = unzip(res.body.to_s)
 
         lines.each do |line|
-          store_domain date, line
+          record = Record.new(updated: date, domain_name: line)
+          store record
         end
       end
 

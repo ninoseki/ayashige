@@ -15,16 +15,14 @@ module Ayashige
       end
 
       def store_newly_registered_domains
-        records.each do |record|
-          store_domain record[:updated], record[:domain]
-        end
+        records.each { |record| store record }
       end
 
       def sth
         @sth ||= @ct.get_sth
       end
 
-      def get_domain(subject)
+      def get_domain_name(subject)
         cn = subject.to_a.find { |a| a.first == "CN" }
         cn[1]
       end
@@ -37,10 +35,10 @@ module Ayashige
 
       def records
         x509_entries.map do |entry|
-          {
-            domain: get_domain(entry.leaf_input.timestamped_entry.x509_entry.subject),
+          Record.new(
+            domain_name: get_domain_name(entry.leaf_input.timestamped_entry.x509_entry.subject),
             updated: entry.leaf_input.timestamped_entry.timestamp.to_s
-          }
+          )
         end
       end
     end
