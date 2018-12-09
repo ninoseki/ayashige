@@ -26,20 +26,21 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
   describe "#records" do
     it "should return an Array of records" do
       subject.records.each do |record|
-        expect(record.key?(:domain)).to eq(true)
-        expect(record.key?(:updated)).to eq(true)
+        expect(record.domain).to be_a(Ayashige::Domain)
+        expect(record.updated_on).to be_a(String)
       end
     end
   end
-
 
   describe "#store_newly_registered_domains" do
     let(:updated_on) { "2018-01-01" }
 
     before do
-      allow(subject).to receive(:records).and_return([
-        { updated: "2018-01-01 11:11:14 +0900", domain: "paypal.pay.pay.world" }
-      ])
+      allow(subject).to receive(:records).and_return(
+        [
+          Ayashige::Record.new(updated: "2018-01-01 11:11:14 +0900", domain_name: "paypal.pay.pay.world")
+        ]
+      )
     end
 
     it "should store parsed domains into Redis" do

@@ -4,6 +4,7 @@ require "ayashige/version"
 
 require "ayashige/utility"
 require "ayashige/domain"
+require "ayashige/record"
 
 require "ayashige/redis"
 
