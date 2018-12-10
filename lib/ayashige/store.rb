@@ -10,10 +10,14 @@ module Ayashige
       @client = Redis.client
     end
 
+    def ttl
+      @ttl ||= (ENV["DEFAULT_TTL"] || 60 * 60 * 24).to_i
+    end
+
     def store(key, field, value)
       @client.multi do
         @client.hset key, field, value
-        @client.expire key, DEFAULT_TTL
+        @client.expire key, ttl
       end
     end
 
