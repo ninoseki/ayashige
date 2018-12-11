@@ -10,14 +10,16 @@ module Ayashige
       @client = Redis.client
     end
 
-    def ttl
-      @ttl ||= (ENV["DEFAULT_TTL"] || 60 * 60 * 24).to_i
+    def default_ttl
+      @default_ttl ||= (ENV["DEFAULT_TTL"] || DEFAULT_TTL).to_i
     end
 
-    def store(key, field, value)
+    def store(domain:, score:, updated_on:, source:)
+      return if exists?(domain)
+
       @client.multi do
-        @client.hset key, field, value
-        @client.expire key, ttl
+        @client.hmset domain, "score", score, "updated_on", updated_on, "source", source
+        @client.expire(domain, default_ttl)
       end
     end
 

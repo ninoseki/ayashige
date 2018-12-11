@@ -37,19 +37,12 @@ RSpec.describe Ayashige::Sources::WhoisDS, :vcr do
   end
 
   describe "#store_newly_registered_domains" do
-    let(:updated_on) { "2018-01-01" }
-
     before do
       allow(subject).to receive(:latest_indexed_date).and_return(updated_on)
       allow(subject).to receive(:latest_zip_file_link).and_return("https://whoisds.com//whois-database/newly-registered-domains/MjAxOC0xMS0yNi56aXA=/nrd")
-      allow(subject).to receive(:unzip).and_return(["paypal.pay.pay.world"])
+      allow(subject).to receive(:unzip).and_return([domain_name])
     end
 
-    it "should store parsed domains into Redis" do
-      output = capture(:stdout) { subject.store_newly_registered_domains }
-      expect(output.include?("paypal.pay.pay.world")).to eq(true)
-
-      expect(redis.exists(updated_on)).to eq(true)
-    end
+    include_examples "#store_newly_registered_domains example"
   end
 end

@@ -14,6 +14,10 @@ module Ayashige
         @ct = CertificateTransparency::Client.new(BASE_URL)
       end
 
+      def name
+        "CT(Google Rocketeer)"
+      end
+
       def store_newly_registered_domains
         records.each { |record| store record }
       end
