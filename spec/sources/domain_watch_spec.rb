@@ -29,8 +29,6 @@ RSpec.describe Ayashige::Sources::DomainWatch, :vcr do
   end
 
   describe "#store_newly_registered_domains" do
-    let(:updated_on) { "2018-01-01" }
-
     before do
       stub_const("Ayashige::Sources::DomainWatch::LIMIT", 2)
 
@@ -43,11 +41,6 @@ RSpec.describe Ayashige::Sources::DomainWatch, :vcr do
       allow(Parallel).to receive(:map).with(1..2).and_yield([1, 2])
     end
 
-    it "should store parsed domains into Redis" do
-      output = capture(:stdout) { subject.store_newly_registered_domains }
-      expect(output.include?("paypal.pay.pay.world")).to eq(true)
-
-      expect(redis.exists(updated_on)).to eq(true)
-    end
+    include_examples "#store_newly_registered_domains example"
   end
 end

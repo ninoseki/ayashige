@@ -48,8 +48,6 @@ RSpec.describe Ayashige::Sources::WebAnalyzer, :vcr do
   end
 
   describe "#store_newly_registered_domains" do
-    let(:updated_on) { "2018-01-01" }
-
     before do
       stub_const("Ayashige::Sources::WebAnalyzer::LIMIT", 2)
       stub_const("Ayashige::Sources::WebAnalyzer::TLDS", ["world"])
@@ -64,11 +62,6 @@ RSpec.describe Ayashige::Sources::WebAnalyzer, :vcr do
       allow(Parallel).to receive(:each).with(["world"]).and_yield("world")
     end
 
-    it "should store parsed domains into Redis" do
-      output = capture(:stdout) { subject.store_newly_registered_domains }
-      expect(output.include?("paypal.pay.pay.world")).to eq(true)
-
-      expect(redis.exists(updated_on)).to eq(true)
-    end
+    include_examples "#store_newly_registered_domains example"
   end
 end

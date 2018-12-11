@@ -32,22 +32,21 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
     end
   end
 
-  describe "#store_newly_registered_domains" do
-    let(:updated_on) { "2018-01-01" }
+  describe "#name" do
+    it "should return a name of the class" do
+      expect(subject.name).to eq("CT(Google Rocketeer)")
+    end
+  end
 
+  describe "#store_newly_registered_domains" do
     before do
       allow(subject).to receive(:records).and_return(
         [
-          Ayashige::Record.new(updated: "2018-01-01 11:11:14 +0900", domain_name: "paypal.pay.pay.world")
+          Ayashige::Record.new(updated: "2018-01-01 11:11:14 +0900", domain_name: domain_name)
         ]
       )
     end
 
-    it "should store parsed domains into Redis" do
-      output = capture(:stdout) { subject.store_newly_registered_domains }
-      expect(output.include?("paypal.pay.pay.world")).to eq(true)
-
-      expect(redis.exists(updated_on)).to eq(true)
-    end
+    include_examples "#store_newly_registered_domains example"
   end
 end
