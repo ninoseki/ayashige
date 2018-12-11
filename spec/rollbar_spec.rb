@@ -4,7 +4,7 @@ RSpec.describe Ayashige::Rollbar do
   subject { Ayashige::Rollbar }
 
   describe "#available?" do
-    context "when ROLLBAR_ACCESS_TOKEN is set" do
+    context "when ENV['ROLLBAR_ACCESS_TOKEN'] exists" do
       before do
         allow(ENV).to receive(:key?).with(subject::ROLLBAR_KEY).and_return(true)
       end
@@ -14,7 +14,7 @@ RSpec.describe Ayashige::Rollbar do
       end
     end
 
-    context "when ROLLBAR_ACCESS_TOKEN is not set" do
+    context "when ENV['ROLLBAR_ACCESS_TOKEN'] not exists" do
       before do
         allow(ENV).to receive(:key?).with(subject::ROLLBAR_KEY).and_return(false)
       end

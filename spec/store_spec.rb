@@ -81,15 +81,15 @@ RSpec.describe Ayashige::Store do
   end
 
   describe "#exists?" do
-    context "when a given key is exist" do
+    context "when a given key exists" do
       before { redis.set "test", "value" }
       it "should return true" do
-        subject.exists? "test"
+        expect(subject.exists?("test")).to eq(true)
       end
     end
-    context "when a given key is not exist" do
-      it "should return true" do
-        subject.exists? "not_exists"
+    context "when a given key not exists" do
+      it "should return false" do
+        expect(subject.exists?("test")).to eq(false)
       end
     end
   end
