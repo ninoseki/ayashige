@@ -15,11 +15,11 @@ module Ayashige
     end
 
     def store(domain:, score:, updated_on:, source:)
-      ttl = @client.ttl(domain)
+      return if exists?(domain)
 
       @client.multi do
         @client.hmset domain, "score", score, "updated_on", updated_on, "source", source
-        @client.expire(domain, default_ttl) unless ttl.positive?
+        @client.expire(domain, default_ttl)
       end
     end
 
