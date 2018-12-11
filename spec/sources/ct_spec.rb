@@ -34,7 +34,7 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
 
   describe "#name" do
     it "should return a name of the class" do
-      expect(subject.name).to eq("CT(Google Rocketeer)")
+      expect(subject.name).to eq("CT log")
     end
   end
 
