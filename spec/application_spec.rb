@@ -25,7 +25,7 @@ RSpec.describe "Application" do
       )
     end
 
-    it "should return 200 OK and filter dupolicate domains" do
+    it "should return 200 OK and JSON response" do
       get "/feed"
       expect(last_response).to be_ok
       array = JSON.parse(last_response.body.to_s)
