@@ -8,7 +8,7 @@ Ayashige provides a list of suspicious newly registered domains as a JSON feed.
 
 ## How it works
 
-- It collects newly registered domains via [WebAnalyzer](https://wa-com.com/), [WhoisDS](https://whoisds.com/), [DomainWatch](https://domainwat.ch/) and a Certififate Transparency log server (Google Rocketeer).
+- It collects newly registered domains via [WebAnalyzer](https://wa-com.com/), [WhoisDS](https://whoisds.com/), [DomainWatch](https://domainwat.ch/) and Certififate Transparency log servers.
 - It computes a suspicious score of a given domain.
   - The scoring rule comes from [x0rz/phishing_catcher](https://github.com/x0rz/phishing_catcher).
 - It stores suspicious domains into a Redis instance.
