@@ -1,23 +1,27 @@
 # frozen_string_literal: true
 
 require "certificate-transparency-client"
-require "set"
 
 module Ayashige
   module Sources
     class CT < Source
-      BASE_URL = "https://ct.googleapis.com/rocketeer"
-      LIMIT = 5_000
+      LIMIT = 1_000
 
       def initialize
         super
 
         @ct_log_servers = [
+          "https://ct.googleapis.com/daedalus",
           "https://ct.googleapis.com/icarus",
+          "https://ct.googleapis.com/logs/argon2019",
+          "https://ct.googleapis.com/logs/argon2020",
           "https://ct.googleapis.com/pilot",
           "https://ct.googleapis.com/rocketeer",
-          "https://ct.googleapis.com/logs/argon2019",
-          "https://yeti2019.ct.digicert.com/log"
+          "https://ct.googleapis.com/testtube",
+          "https://nessie2019.ct.digicert.com/log",
+          "https://nessie2020.ct.digicert.com/log",
+          "https://yeti2019.ct.digicert.com/log",
+          "https://yeti2020.ct.digicert.com/log"
         ]
       end
 
@@ -43,6 +47,8 @@ module Ayashige
             entries << ct.get_entries(sth.tree_size - LIMIT, sth.tree_size).select do |entry|
               entry.leaf_input.timestamped_entry.x509_entry
             end
+          rescue StandardError => _
+            next
           end
         end.flatten
       end
@@ -53,7 +59,9 @@ module Ayashige
             domain_name: get_domain_name(entry.leaf_input.timestamped_entry.x509_entry.subject),
             updated: entry.leaf_input.timestamped_entry.timestamp.to_s
           )
-        end
+        rescue NoMethodError => _
+          nil
+        end.compact
       end
     end
   end
