@@ -14,4 +14,20 @@ RSpec.describe Ayashige::Domain do
       end
     end
   end
+
+  describe "#suspicious?" do
+    context "when given an unofficial suspicious domain" do
+      it "should return true" do
+        d = subject.new("pay.pay.pay.pay.paypal.com.cn")
+        expect(d.suspicious?).to eq(true)
+      end
+    end
+
+    context "when given an suspicious but official domain" do
+      it "should return false" do
+        d = subject.new("pay.pay.pay.pay.paypal.com")
+        expect(d.suspicious?).to eq(false)
+      end
+    end
+  end
 end
