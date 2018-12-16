@@ -23,7 +23,7 @@ bundle install --path vendor/bundle
 
 ## Usage
 
-Please set following environmental values before using.
+Please set following environment variables before using.
 
 ```sh
 REDIS_HOST = YOUR_REDIS_HOST
@@ -34,13 +34,21 @@ REDIS_PASSWORD = YOUR_REDIS_PASSWORD
 ### Run Cron jobs
 
 ```sh
-bundle exec ruby bin/web_analyzer_job.rb
-bundle exec ruby bin/whoisds_job.rb
+# Grab domains from CT log servers
+bundle exec ruby bin/ct_job.rb
+
+# Grab domains from DomainWatch
 bundle exec ruby bin/domain_watch_job.rb
+
+# Grab domains from WebAnalyzer (it should be a daily job)
+bundle exec ruby bin/web_analyzer_job.rb
+
+# Grab domains from WhoisDS (it should be a daily job)
+bundle exec ruby bin/whoisds_job.rb
 ```
 
-- The jobs collects the latest registered domains from WebAnalyzer, WhoisDS & DomainWatch.
-- It checks a suspicious score of a given each domain and stores a suspicious one into a Redis instance.
+- It checks a suspicious score of a given each domain and stores a suspicious one into a Redis instance with TTL 24 hours.
+  - You can specify your own default TTL via `DEFAULT_TTL` environment variable.
 
 ### Run a Web app
 
@@ -54,8 +62,6 @@ bundle exec puma config.ru
 
 - Notes:
   - This app is hosted on Heroku free dyno.
-  - The Cron job is triggered at 20:00 UTC+0 every day.
-  - The data in the Redis instance will expire after 48 hours.
   - I'm running this app just as a hobby and I cannot assure its consistency.
 
 ## Contributing
