@@ -36,7 +36,9 @@ module Ayashige
     end
 
     def suspicious?
-      score >= 80 && !official_domain?
+      return false if official_domain?
+
+      score >= 80
     end
 
     private
