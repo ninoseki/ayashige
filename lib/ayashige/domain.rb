@@ -36,7 +36,7 @@ module Ayashige
     end
 
     def suspicious?
-      score >= 80
+      score >= 80 && !official_domain?
     end
 
     private
@@ -52,6 +52,18 @@ module Ayashige
 
     def entropy_score
       (without_tld.entropy * 50.0).round
+    end
+
+    def white
+      @white ||= YAML.safe_load File.read(File.expand_path("./config/white.yml", __dir__))
+    end
+
+    def official_domains
+      @official_domains ||= white["official_domains"]
+    end
+
+    def official_domain?
+      official_domains.any? { |domain| @domain.end_with? domain }
     end
 
     def suspicious_words_score
