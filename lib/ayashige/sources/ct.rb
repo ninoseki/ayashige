@@ -1,28 +1,67 @@
 # frozen_string_literal: true
 
 require "certificate-transparency-client"
+require "filecache"
+require "http"
 
 module Ayashige
   module Sources
-    class CT < Source
+    class CTLServer
       LIMIT = 1_000
+      attr_reader :url
+
+      def initialize(url, cache)
+        @url = url
+        @cache = cache
+      end
+
+      def x509_entries
+        ct = CertificateTransparency::Client.new(url)
+        sth = ct.get_sth
+
+        cached_tree_size = @cache.get(url) || sth.tree_size - LIMIT
+
+        entries = ct.get_entries(cached_tree_size, sth.tree_size).select do |entry|
+          entry.leaf_input.timestamped_entry.x509_entry
+        end
+
+        @cache.set(url, sth.tree_size)
+
+        entries
+      end
+    end
+
+    class CT < Source
+      CTL_LIST = "https://www.gstatic.com/ct/log_list/all_logs_list.json"
+      BAD_CTL_SERVERS = [
+        "alpha.ctlogs.org/", "clicky.ct.letsencrypt.org/", "ct.akamai.com/", "ct.filippo.io/behindthesofa/",
+        "ct.gdca.com.cn/", "ct.izenpe.com/", "ct.izenpe.eus/", "ct.sheca.com/", "ct.startssl.com/", "ct.wosign.com/",
+        "ctserver.cnnic.cn/", "ctlog.api.venafi.com/", "ctlog.gdca.com.cn/", "ctlog.sheca.com/", "ctlog.wosign.com/",
+        "ctlog2.wosign.com/", "flimsy.ct.nordu.net:8080/", "log.certly.io/", "nessie2021.ct.digicert.com/log/",
+        "plausible.ct.nordu.net/", "www.certificatetransparency.cn/ct/", "ct.googleapis.com/testtube/",
+        "ct.googleapis.com/daedalus/"
+      ].freeze
 
       def initialize
         super
+        @cache = FileCache.new("ct")
+      end
 
-        @ct_log_servers = [
-          "https://ct.googleapis.com/daedalus",
-          "https://ct.googleapis.com/icarus",
-          "https://ct.googleapis.com/logs/argon2019",
-          "https://ct.googleapis.com/logs/argon2020",
-          "https://ct.googleapis.com/pilot",
-          "https://ct.googleapis.com/rocketeer",
-          "https://ct.googleapis.com/testtube",
-          "https://nessie2019.ct.digicert.com/log",
-          "https://nessie2020.ct.digicert.com/log",
-          "https://yeti2019.ct.digicert.com/log",
-          "https://yeti2020.ct.digicert.com/log"
-        ]
+      def ctl_servers
+        @ctl_servers ||= [].tap do |servers|
+          res = HTTP.get(CTL_LIST)
+          json = JSON.parse(res.body.to_s)
+          logs = json.dig("logs")
+          break unless logs
+
+          logs.each do |log|
+            url = log.dig("url")
+            next unless url || BAD_CTL_SERVERS.include?(url)
+
+            # remove "/" from end of url
+            servers << CTLServer.new("https://#{url[0..-2]}", @cache)
+          end
+        end
       end
 
       def name
@@ -40,17 +79,13 @@ module Ayashige
       end
 
       def x509_entries
-        @x509_entries ||= [].tap do |entries|
-          @ct_log_servers.each do |ct_log_server|
-            ct = CertificateTransparency::Client.new(ct_log_server)
-            sth = ct.get_sth
-            entries << ct.get_entries(sth.tree_size - LIMIT, sth.tree_size).select do |entry|
-              entry.leaf_input.timestamped_entry.x509_entry
-            end
-          rescue StandardError => _
-            next
-          end
-        end.flatten
+        entries = []
+        ctl_servers.each do |ctl_server|
+          entries << ctl_server.x509_entries
+        rescue StandardError => _
+          next
+        end
+        entries.flatten
       end
 
       def records
