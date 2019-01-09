@@ -3,6 +3,25 @@
 require "mock_redis"
 require "fileutils"
 
+RSpec.describe Ayashige::Sources::CTLServer, :vcr do
+  let(:cache) { double("cache") }
+
+  before do
+    allow(cache).to receive(:get).and_return(0)
+    allow(cache).to receive(:set)
+  end
+
+  subject { Ayashige::Sources::CTLServer.new("https://ct.googleapis.com/logs/argon2020", cache) }
+
+  describe "#x509_entries" do
+    it "should return an Array of CT log entries which have x509 entry" do
+      subject.x509_entries.each do |entry|
+        expect(entry.leaf_input.timestamped_entry.x509_entry).to be_a(OpenSSL::X509::Certificate)
+      end
+    end
+  end
+end
+
 RSpec.describe Ayashige::Sources::CT, :vcr do
   subject { Ayashige::Sources::CT.new }
 

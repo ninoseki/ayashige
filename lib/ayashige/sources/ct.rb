@@ -20,6 +20,7 @@ module Ayashige
         sth = ct.get_sth
 
         cached_tree_size = @cache.get(url) || sth.tree_size - LIMIT
+        cached_tree_size = 0 if cached_tree_size.negative?
 
         entries = ct.get_entries(cached_tree_size, sth.tree_size).select do |entry|
           entry.leaf_input.timestamped_entry.x509_entry
@@ -78,18 +79,16 @@ module Ayashige
         domain.gsub /\*\./, ""
       end
 
-      def x509_entries
-        entries = []
-        ctl_servers.each do |ctl_server|
+      def all_x509_entries
+        ctl_servers.map do |ctl_server|
           entries << ctl_server.x509_entries
         rescue StandardError => _
-          next
-        end
-        entries.flatten
+          []
+        end.flatten
       end
 
       def records
-        x509_entries.map do |entry|
+        all_x509_entries.map do |entry|
           Record.new(
             domain_name: get_domain_name(entry.leaf_input.timestamped_entry.x509_entry.subject),
             updated: entry.leaf_input.timestamped_entry.timestamp.to_s
