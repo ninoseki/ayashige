@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "mock_redis"
+require "fileutils"
 
 RSpec.describe Ayashige::Sources::CT, :vcr do
   subject { Ayashige::Sources::CT.new }
@@ -15,19 +16,14 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
     redis.flushdb
   end
 
-  describe "#x509_entries" do
-    it "should return an Array of CT log entries which have x509 entry" do
-      subject.x509_entries.each do |entry|
-        expect(entry.leaf_input.timestamped_entry.x509_entry).to be_a(OpenSSL::X509::Certificate)
-      end
-    end
-  end
-
   describe "#records" do
+    before { FileUtils.rm_r("/tmp/ct") }
     it "should return an Array of records" do
       subject.records.each do |record|
         expect(record.domain).to be_a(Ayashige::Domain)
         expect(record.updated_on).to be_a(String)
+      rescue ArgumentError => _
+        next
       end
     end
   end
