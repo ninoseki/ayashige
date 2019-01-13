@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require "mock_redis"
+require "filecache"
 require "fileutils"
+require "mock_redis"
 
 RSpec.describe Ayashige::Sources::CTLServer, :vcr do
   let(:cache) { double("cache") }
@@ -35,10 +36,34 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
     redis.flushdb
   end
 
+  describe "#ctl_servers" do
+    it "should return an Array of CTLServer" do
+      servers = subject.ctl_servers
+      expect(servers).to be_an(Array)
+      expect(servers.first).to be_an(Ayashige::Sources::CTLServer)
+    end
+  end
+
   describe "#records" do
-    before { FileUtils.rm_r("/tmp/ct") }
+    before do
+      stub_const("Ayashige::Sources::CTLServer::LIMIT", 10)
+
+      cache_dir = File.expand_path("../../tmp/cache", __dir__)
+      Dir.exist?(cache_dir) ? FileUtils.rm_r(cache_dir) : FileUtils.mkdir_p(cache_dir)
+      cache = FileCache.new("test", cache_dir)
+      ctl_servers = [
+        Ayashige::Sources::CTLServer.new("https://ct.googleapis.com/logs/argon2019", cache),
+        Ayashige::Sources::CTLServer.new("https://ct.googleapis.com/logs/argon2020", cache),
+      ]
+      allow(subject).to receive(:ctl_servers).and_return(ctl_servers)
+    end
+
     it "should return an Array of records" do
-      subject.records.each do |record|
+      records = subject.records
+      expect(records).to be_an(Array)
+      expect(records).not_to be_empty
+
+      records.each do |record|
         expect(record.domain).to be_a(Ayashige::Domain)
         expect(record.updated_on).to be_a(String)
       rescue ArgumentError => _
