@@ -6,7 +6,7 @@ require "http"
 
 module Ayashige
   module Sources
-    class CTLServer
+    class CTLogServer
       LIMIT = 1_000
       attr_reader :url
 
@@ -35,8 +35,6 @@ module Ayashige
     end
 
     class CT < Source
-      CTL_LIST = "https://ct.grahamedgecombe.com/logs.json"
-
       def initialize(cache_dir = "/tmp")
         super()
         @cache = FileCache.new("ct", cache_dir)
@@ -46,11 +44,11 @@ module Ayashige
         @config ||= YAML.safe_load File.read(File.expand_path("./../config/ct.yml", __dir__))
       end
 
-      def ctl_servers
-        @ctl_servers ||= [].tap do |servers|
+      def ct_log_servers
+        @ct_log_servers ||= [].tap do |servers|
           urls = config.dig("ct_log_servers") || []
           urls.each do |url|
-            servers << CTLServer.new(url, @cache)
+            servers << CTLogServer.new(url, @cache)
           end
         end
       end
@@ -72,7 +70,7 @@ module Ayashige
       end
 
       def all_x509_entries
-        ctl_servers.map(&:x509_entries).flatten
+        ct_log_servers.map(&:x509_entries).flatten
       end
 
       def records

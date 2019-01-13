@@ -4,7 +4,7 @@ require "filecache"
 require "fileutils"
 require "mock_redis"
 
-RSpec.describe Ayashige::Sources::CTLServer, :vcr do
+RSpec.describe Ayashige::Sources::CTLogServer, :vcr do
   let(:cache) { double("cache") }
 
   before do
@@ -12,7 +12,7 @@ RSpec.describe Ayashige::Sources::CTLServer, :vcr do
     allow(cache).to receive(:set)
   end
 
-  subject { Ayashige::Sources::CTLServer.new("https://ct.googleapis.com/logs/argon2020", cache) }
+  subject { Ayashige::Sources::CTLogServer.new("https://ct.googleapis.com/logs/argon2020", cache) }
 
   describe "#x509_entries" do
     it "should return an Array of CT log entries which have x509 entry" do
@@ -36,11 +36,11 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
     redis.flushdb
   end
 
-  describe "#ctl_servers" do
+  describe "#ct_log_servers" do
     it "should return an Array of CTLServer" do
-      servers = subject.ctl_servers
+      servers = subject.ct_log_servers
       expect(servers).to be_an(Array)
-      expect(servers.first).to be_an(Ayashige::Sources::CTLServer)
+      expect(servers.first).to be_an(Ayashige::Sources::CTLogServer)
     end
   end
 
@@ -51,11 +51,11 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
       cache_dir = File.expand_path("../../tmp/cache", __dir__)
       Dir.exist?(cache_dir) ? FileUtils.rm_r(cache_dir) : FileUtils.mkdir_p(cache_dir)
       cache = FileCache.new("test", cache_dir)
-      ctl_servers = [
-        Ayashige::Sources::CTLServer.new("https://ct.googleapis.com/logs/argon2019", cache),
-        Ayashige::Sources::CTLServer.new("https://ct.googleapis.com/logs/argon2020", cache),
+      ct_log_servers = [
+        Ayashige::Sources::CTLogServer.new("https://ct.googleapis.com/logs/argon2019", cache),
+        Ayashige::Sources::CTLogServer.new("https://ct.googleapis.com/logs/argon2020", cache),
       ]
-      allow(subject).to receive(:ctl_servers).and_return(ctl_servers)
+      allow(subject).to receive(:ct_log_servers).and_return(ct_log_servers)
     end
 
     it "should return an Array of records" do
