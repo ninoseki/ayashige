@@ -29,38 +29,28 @@ module Ayashige
         @cache.set(url, sth.tree_size)
 
         entries
+      rescue StandardError => _
+        []
       end
     end
 
     class CT < Source
-      CTL_LIST = "https://www.gstatic.com/ct/log_list/all_logs_list.json"
-      BAD_CTL_SERVERS = [
-        "alpha.ctlogs.org/", "clicky.ct.letsencrypt.org/", "ct.akamai.com/", "ct.filippo.io/behindthesofa/",
-        "ct.gdca.com.cn/", "ct.izenpe.com/", "ct.izenpe.eus/", "ct.sheca.com/", "ct.startssl.com/", "ct.wosign.com/",
-        "ctserver.cnnic.cn/", "ctlog.api.venafi.com/", "ctlog.gdca.com.cn/", "ctlog.sheca.com/", "ctlog.wosign.com/",
-        "ctlog2.wosign.com/", "flimsy.ct.nordu.net:8080/", "log.certly.io/", "nessie2021.ct.digicert.com/log/",
-        "plausible.ct.nordu.net/", "www.certificatetransparency.cn/ct/", "ct.googleapis.com/testtube/",
-        "ct.googleapis.com/daedalus/"
-      ].freeze
+      CTL_LIST = "https://ct.grahamedgecombe.com/logs.json"
 
-      def initialize
-        super
-        @cache = FileCache.new("ct")
+      def initialize(cache_dir = "/tmp")
+        super()
+        @cache = FileCache.new("ct", cache_dir)
+      end
+
+      def config
+        @config ||= YAML.safe_load File.read(File.expand_path("./../config/ct.yml", __dir__))
       end
 
       def ctl_servers
         @ctl_servers ||= [].tap do |servers|
-          res = HTTP.get(CTL_LIST)
-          json = JSON.parse(res.body.to_s)
-          logs = json.dig("logs")
-          break unless logs
-
-          logs.each do |log|
-            url = log.dig("url")
-            next unless url || BAD_CTL_SERVERS.include?(url)
-
-            # remove "/" from end of url
-            servers << CTLServer.new("https://#{url[0..-2]}", @cache)
+          urls = config.dig("ct_log_servers") || []
+          urls.each do |url|
+            servers << CTLServer.new(url, @cache)
           end
         end
       end
@@ -75,26 +65,25 @@ module Ayashige
 
       def get_domain_name(subject)
         cn = subject.to_a.find { |a| a.first == "CN" }
+        return nil unless cn
+
         domain = cn[1]
         domain.gsub /\*\./, ""
       end
 
       def all_x509_entries
-        ctl_servers.map do |ctl_server|
-          entries << ctl_server.x509_entries
-        rescue StandardError => _
-          []
-        end.flatten
+        ctl_servers.map(&:x509_entries).flatten
       end
 
       def records
         all_x509_entries.map do |entry|
+          domain_name = get_domain_name(entry.leaf_input.timestamped_entry.x509_entry.subject)
+          next unless domain_name
+
           Record.new(
-            domain_name: get_domain_name(entry.leaf_input.timestamped_entry.x509_entry.subject),
+            domain_name: domain_name,
             updated: entry.leaf_input.timestamped_entry.timestamp.to_s
           )
-        rescue NoMethodError => _
-          nil
         end.compact
       end
     end
