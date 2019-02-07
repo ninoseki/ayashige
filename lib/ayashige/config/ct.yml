@@ -1,10 +1,12 @@
 ct_log_servers:
+  - https://ct.cloudflare.com/logs/cirrus
   - https://ct.cloudflare.com/logs/nimbus2019
   - https://ct.cloudflare.com/logs/nimbus2020
   - https://ct.cloudflare.com/logs/nimbus2021
   - https://ct.cloudflare.com/logs/nimbus2022
   - https://ct.cloudflare.com/logs/nimbus2023
   - https://ct.googleapis.com/aviator
+  - https://ct.googleapis.com/daedalus
   - https://ct.googleapis.com/icarus
   - https://ct.googleapis.com/logs/argon2019
   - https://ct.googleapis.com/logs/argon2020
@@ -20,11 +22,15 @@ ct_log_servers:
   - https://ct.googleapis.com/submariner
   - https://ct1.digicert-ct.com/log
   - https://ct2.digicert-ct.com/log
+  - https://ctlog-gen2.api.venafi.com
+  - https://dodo.ct.comodo.com
   - https://golem.ct.digicert.com/log
+  - https://mammoth.ct.comodo.com
   - https://nessie2019.ct.digicert.com/log
   - https://nessie2020.ct.digicert.com/log
   - https://nessie2021.ct.digicert.com/log
   - https://nessie2022.ct.digicert.com/log
+  - https://sabre.ct.comodo.com
   - https://yeti2019.ct.digicert.com/log
   - https://yeti2020.ct.digicert.com/log
   - https://yeti2021.ct.digicert.com/log
