@@ -36,13 +36,13 @@ module Ayashige
 
       def html2doc(html)
         Oga.parse_html html
-      rescue StandardError => _
+      rescue StandardError => e
         nil
       end
 
       def xml2doc(xml)
         Oga.parse_xml xml
-      rescue StandardError => _
+      rescue StandardError => e
         nil
       end
     end

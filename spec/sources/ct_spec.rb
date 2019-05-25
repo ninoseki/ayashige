@@ -5,6 +5,8 @@ require "fileutils"
 require "mock_redis"
 
 RSpec.describe Ayashige::Sources::CTLogServer, :vcr do
+  subject { Ayashige::Sources::CTLogServer.new("https://ct.googleapis.com/logs/argon2020", cache) }
+
   let(:cache) { double("cache") }
 
   before do
@@ -12,10 +14,8 @@ RSpec.describe Ayashige::Sources::CTLogServer, :vcr do
     allow(cache).to receive(:set)
   end
 
-  subject { Ayashige::Sources::CTLogServer.new("https://ct.googleapis.com/logs/argon2020", cache) }
-
   describe "#x509_entries" do
-    it "should return an Array of CT log entries which have x509 entry" do
+    it "returns an Array of CT log entries which have x509 entry" do
       subject.x509_entries.each do |entry|
         expect(entry.leaf_input.timestamped_entry.x509_entry).to be_a(OpenSSL::X509::Certificate)
       end
@@ -37,7 +37,7 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
   end
 
   describe "#ct_log_servers" do
-    it "should return an Array of CTLServer" do
+    it "returns an Array of CTLServer" do
       servers = subject.ct_log_servers
       expect(servers).to be_an(Array)
       expect(servers.first).to be_an(Ayashige::Sources::CTLogServer)
@@ -58,7 +58,7 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
       allow(subject).to receive(:ct_log_servers).and_return(ct_log_servers)
     end
 
-    it "should return an Array of records" do
+    it "returns an Array of records" do
       records = subject.records
       expect(records).to be_an(Array)
       expect(records).not_to be_empty
@@ -66,14 +66,14 @@ RSpec.describe Ayashige::Sources::CT, :vcr do
       records.each do |record|
         expect(record.domain).to be_a(Ayashige::Domain)
         expect(record.updated_on).to be_a(String)
-      rescue ArgumentError => _
+      rescue ArgumentError => _e
         next
       end
     end
   end
 
   describe "#name" do
-    it "should return a name of the class" do
+    it "returns a name of the class" do
       expect(subject.name).to eq("CT log")
     end
   end

@@ -16,7 +16,7 @@ RSpec.describe Ayashige::Sources::DomainWatch, :vcr do
   end
 
   describe "#get_records_from_doc" do
-    it "should return domains in a page as an Array" do
+    it "returns domains in a page as an Array" do
       page = subject.get_page(1)
       records = subject.get_records_from_doc(page)
 

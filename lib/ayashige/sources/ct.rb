@@ -29,7 +29,7 @@ module Ayashige
         @cache.set(url, sth.tree_size)
 
         entries
-      rescue StandardError => _
+      rescue StandardError => _e
         []
       end
     end

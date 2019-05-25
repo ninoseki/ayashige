@@ -16,13 +16,13 @@ RSpec.describe Ayashige::Sources::WebAnalyzer, :vcr do
   end
 
   describe "#latest_indexed_date" do
-    it "should return the latest indexed date as a String" do
+    it "returns the latest indexed date as a String" do
       expect(subject.latest_indexed_date).to be_a(String)
     end
   end
 
   describe "#get_records_from_doc" do
-    it "should return domains in a page as an Array" do
+    it "returns domains in a page as an Array" do
       page = subject.get_page("2018-11-22", "com", "1")
       records = subject.get_records_from_doc(page)
 
@@ -35,7 +35,7 @@ RSpec.describe Ayashige::Sources::WebAnalyzer, :vcr do
   end
 
   describe "#get_links_from_doc" do
-    it "should return links in a page as an Array" do
+    it "returns links in a page as an Array" do
       page = subject.get_page("2018-11-22", "com", "1")
       links = subject.get_links_from_doc(page)
 
