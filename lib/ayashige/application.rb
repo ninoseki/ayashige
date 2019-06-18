@@ -32,5 +32,9 @@ module Ayashige
         [item[:updated_on], item[:domain]]
       end.to_json
     end
+
+    not_found do
+      redirect "/"
+    end
   end
 end
