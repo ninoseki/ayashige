@@ -11,7 +11,7 @@ RSpec.describe "Application" do
   end
 
   describe "GET /" do
-    it "should return 200 OK" do
+    it "returns 200 OK" do
       get "/"
       expect(last_response).to be_ok
     end
@@ -25,7 +25,7 @@ RSpec.describe "Application" do
       )
     end
 
-    it "should return 200 OK and JSON response" do
+    it "returns 200 OK and JSON response" do
       get "/feed"
       expect(last_response).to be_ok
       array = JSON.parse(last_response.body.to_s)
@@ -42,6 +42,14 @@ RSpec.describe "Application" do
       expect(last["updated_on"]).to eq("2018-01-02")
       expect(last["score"]).to be_an(Integer)
       expect(last["source"]).to be_a(String)
+    end
+  end
+
+  describe "GET /404" do
+    it "redirects to the root" do
+      get "/404"
+      expect(last_response.status).to eq(302)
+      expect(last_response.headers["Location"]).to eq("http://example.org/")
     end
   end
 end
