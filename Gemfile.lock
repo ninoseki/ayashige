@@ -74,6 +74,7 @@ GEM
       ast
     rubyzip (1.2.3)
     safe_yaml (1.0.5)
+    securitytrails (0.2.0)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -122,6 +123,7 @@ DEPENDENCIES
   rollbar
   rspec
   rubyzip
+  securitytrails
   simpleidn
   sinatra
   vcr

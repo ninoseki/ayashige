@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 ruby "~> 2.6"
@@ -14,6 +16,7 @@ gem "puma"
 gem "redis"
 gem "rollbar"
 gem "rubyzip"
+gem "securitytrails"
 gem "simpleidn"
 gem "sinatra"
 
