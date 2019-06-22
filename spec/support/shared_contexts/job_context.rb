@@ -9,11 +9,12 @@ RSpec.shared_context "job context", shared_context: :metadata do
         subject.instance_variable_set(:@source, mock)
       end
 
-      it "should return the latest indexed date as a String" do
+      it "returns the latest indexed date as a String" do
         output = capture(:stdout){ subject.perform }
         expect(output.empty?).to eq(true)
       end
     end
+
     context "when an error is raised" do
       before do
         mock = double
@@ -21,7 +22,7 @@ RSpec.shared_context "job context", shared_context: :metadata do
         subject.instance_variable_set(:@source, mock)
       end
 
-      it "should return the latest indexed date as a String" do
+      it "returns the latest indexed date as a String" do
         output = capture(:stdout) { subject.perform }
         expect(output).to include("argument error")
       end
