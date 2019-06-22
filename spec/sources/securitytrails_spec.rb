@@ -23,7 +23,7 @@ RSpec.describe Ayashige::Sources::SecurityTrails do
     end
 
     it do
-      records = subject.get_records
+      records = subject.records
       records.each do |record|
         expect(record.domain).to be_a(Ayashige::Domain)
         expect(record.updated_on).to be_a(String)
@@ -33,8 +33,7 @@ RSpec.describe Ayashige::Sources::SecurityTrails do
 
   describe "#store_newly_registered_domains" do
     before do
-      allow(subject).to receive(:get_records).and_return(records)
-      allow(Parallel).to receive(:map).with(1..2).and_yield([1, 2])
+      allow(subject).to receive(:records).and_return(records)
     end
 
     include_examples "#store_newly_registered_domains example"

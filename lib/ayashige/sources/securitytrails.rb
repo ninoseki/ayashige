@@ -13,11 +13,10 @@ module Ayashige
       end
 
       def store_newly_registered_domains
-        records = get_records
         records.each { |record| store record }
       end
 
-      def get_records
+      def records
         domains = @api.feeds.domains("new")
         date = DateTime.now.to_s
         domains.map do |domain|
