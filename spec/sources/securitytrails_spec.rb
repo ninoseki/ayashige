@@ -3,12 +3,15 @@
 require "mock_redis"
 
 RSpec.describe Ayashige::Sources::SecurityTrails do
+  include_context "source context"
+
   subject { described_class.new }
 
   let(:redis) { MockRedis.new }
 
   before do
     allow(Ayashige::Redis).to receive(:client).and_return(redis)
+    allow(Parallel).to receive(:processor_count).and_return(0)
   end
 
   after do

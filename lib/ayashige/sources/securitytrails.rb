@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "date"
+require "parallel"
 require "securitytrails"
 
 module Ayashige
@@ -13,7 +14,7 @@ module Ayashige
       end
 
       def store_newly_registered_domains
-        records.each { |record| store record }
+        Parallel.each(records) { |record| store record }
       end
 
       def records

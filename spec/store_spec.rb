@@ -3,7 +3,7 @@
 require "mock_redis"
 
 RSpec.describe Ayashige::Store do
-  subject { Ayashige::Store.new }
+  subject { described_class.new }
 
   let(:redis) { MockRedis.new }
 
@@ -25,7 +25,7 @@ RSpec.describe Ayashige::Store do
   end
 
   describe "#store" do
-    it "should store arguments as a Hash" do
+    it "stores arguments as a Hash" do
       subject.store(sample)
       expect(redis.hgetall("test.com")).to eq(
         "score" => "80",
@@ -38,7 +38,8 @@ RSpec.describe Ayashige::Store do
       before do
         allow(ENV).to receive(:[]).with("DEFAULT_TTL").and_return(100)
       end
-      it "should store arguments as a Hash with TTL = 100" do
+
+      it "stores arguments as a Hash with TTL = 100" do
         subject.store sample
         expect(redis.ttl("test.com")).to be_between(1, 100)
       end
@@ -46,7 +47,7 @@ RSpec.describe Ayashige::Store do
   end
 
   describe "#get" do
-    it "should return a Hash value" do
+    it "returns a Hash value" do
       redis.hmset "test.com", "score", 80, "updated_on", "2018-01-01", "source", "test"
       redis.hmset "test2.com", "score", 80, "updated_on", "2018-01-02", "source", "test"
       expect(subject.get("test.com")).to eq(
@@ -62,7 +63,8 @@ RSpec.describe Ayashige::Store do
       redis.set "key1", "test"
       redis.set "key2", "test"
     end
-    it "should return keys" do
+
+    it "returns keys" do
       expect(subject.keys).to eq(["key1", "key2"])
     end
   end
@@ -72,7 +74,8 @@ RSpec.describe Ayashige::Store do
       redis.hmset "test.com", "score", 80, "updated_on", "2018-01-01", "source", "test"
       redis.hmset "test2.com", "score", 80, "updated_on", "2018-01-02", "source", "test"
     end
-    it "should return all data as a Hash" do
+
+    it "returns all data as a Hash" do
       expect(subject.all).to eq(
         "test.com" => { "score" => "80", "updated_on" => "2018-01-01", "source" => "test" },
         "test2.com" => { "score" => "80", "updated_on" => "2018-01-02", "source" => "test" }
@@ -83,12 +86,14 @@ RSpec.describe Ayashige::Store do
   describe "#exists?" do
     context "when a given key exists" do
       before { redis.set "test", "value" }
-      it "should return true" do
+
+      it "returns true" do
         expect(subject.exists?("test")).to eq(true)
       end
     end
+
     context "when a given key not exists" do
-      it "should return false" do
+      it "returns false" do
         expect(subject.exists?("test")).to eq(false)
       end
     end
