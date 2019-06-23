@@ -28,10 +28,12 @@ RSpec.configure do |config|
 end
 
 require_relative "./support/shared_contexts/job_context"
+require_relative "./support/shared_contexts/source_context"
 require_relative "./support/shared_examples/source_example"
 
 RSpec.configure do |rspec|
   rspec.include_context "job context", include_shared: true
+  rspec.include_context "source context", include_shared: true
 end
 
 VCR.configure do |config|

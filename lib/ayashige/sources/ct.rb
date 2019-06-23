@@ -3,6 +3,7 @@
 require "certificate-transparency-client"
 require "filecache"
 require "http"
+require "parallel"
 
 module Ayashige
   module Sources
@@ -58,7 +59,7 @@ module Ayashige
       end
 
       def store_newly_registered_domains
-        records.each { |record| store record }
+        Parallel.each(records) { |record| store record }
       end
 
       def get_domain_name(subject)

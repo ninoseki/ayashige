@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Ayashige::Rollbar do
-  subject { Ayashige::Rollbar }
+  subject { described_class }
 
   describe "#available?" do
     context "when ENV['ROLLBAR_ACCESS_TOKEN'] exists" do
@@ -9,7 +9,7 @@ RSpec.describe Ayashige::Rollbar do
         allow(ENV).to receive(:key?).with(subject::ROLLBAR_KEY).and_return(true)
       end
 
-      it "should return true" do
+      it "returns true" do
         expect(subject.available?).to eq(true)
       end
     end
@@ -19,7 +19,7 @@ RSpec.describe Ayashige::Rollbar do
         allow(ENV).to receive(:key?).with(subject::ROLLBAR_KEY).and_return(false)
       end
 
-      it "should return false" do
+      it "returns false" do
         expect(subject.available?).to eq(false)
       end
     end
