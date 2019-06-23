@@ -12,17 +12,11 @@ require "ayashige/store"
 
 require "ayashige/sources/source"
 require "ayashige/sources/ct"
-require "ayashige/sources/domain_watch"
 require "ayashige/sources/securitytrails"
-require "ayashige/sources/web_analyzer"
-require "ayashige/sources/whoisds"
 
 require "ayashige/jobs/job"
 require "ayashige/jobs/ct"
-require "ayashige/jobs/domain_watch"
 require "ayashige/jobs/securitytrails"
-require "ayashige/jobs/web_analyzer"
-require "ayashige/jobs/whoisds"
 
 require "ayashige/rollbar"
 

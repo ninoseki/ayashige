@@ -8,7 +8,7 @@ Ayashige provides a list of suspicious newly registered domains as a JSON feed.
 
 ## How it works
 
-- It collects newly registered domains via [WebAnalyzer](https://wa-com.com/), [WhoisDS](https://whoisds.com/), [DomainWatch](https://domainwat.ch/) and Certififate Transparency log servers.
+- It collects newly registered domains via Certififate Transparency log servers and [SecurityTrails](https://securitytrails.com/).
 - It computes a suspicious score of a given domain.
   - The scoring rule comes from [x0rz/phishing_catcher](https://github.com/x0rz/phishing_catcher).
 - It stores suspicious domains into a Redis instance.
@@ -29,6 +29,7 @@ Please set following environment variables before using.
 REDIS_HOST = YOUR_REDIS_HOST
 REDIS_PORT = YOUR_REDIS_PORT
 REDIS_PASSWORD = YOUR_REDIS_PASSWORD
+SECURITYTRAILS_API_KEY = YOUR_SECURITYTRAILS_API_KEY
 ```
 
 ### Run Cron jobs
@@ -37,14 +38,8 @@ REDIS_PASSWORD = YOUR_REDIS_PASSWORD
 # Grab domains from CT log servers
 bundle exec ruby bin/ct_job.rb
 
-# Grab domains from DomainWatch
-bundle exec ruby bin/domain_watch_job.rb
-
-# Grab domains from WebAnalyzer (it should be a daily job)
-bundle exec ruby bin/web_analyzer_job.rb
-
-# Grab domains from WhoisDS (it should be a daily job)
-bundle exec ruby bin/whoisds_job.rb
+# Grab domains from SecurityTrails
+bundle exec ruby bin/securitytrails_jo.rb
 ```
 
 - It checks a suspicious score of a given each domain and stores a suspicious one into a Redis instance with TTL 24 hours.
