@@ -24,7 +24,7 @@ module Ayashige
     end
 
     def exists?(key)
-      @client.exists key
+      @client.exists(key) != 0
     end
 
     def get(key)

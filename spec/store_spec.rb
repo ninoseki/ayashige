@@ -26,7 +26,8 @@ RSpec.describe Ayashige::Store do
 
   describe "#store" do
     it "stores arguments as a Hash" do
-      subject.store(sample)
+      subject.store(**sample)
+
       expect(redis.hgetall("test.com")).to eq(
         "score" => "80",
         "updated_on" => "2018-01-01",
@@ -40,7 +41,8 @@ RSpec.describe Ayashige::Store do
       end
 
       it "stores arguments as a Hash with TTL = 100" do
-        subject.store sample
+        subject.store(**sample)
+
         expect(redis.ttl("test.com")).to be_between(1, 100)
       end
     end
@@ -50,6 +52,7 @@ RSpec.describe Ayashige::Store do
     it "returns a Hash value" do
       redis.hmset "test.com", "score", 80, "updated_on", "2018-01-01", "source", "test"
       redis.hmset "test2.com", "score", 80, "updated_on", "2018-01-02", "source", "test"
+
       expect(subject.get("test.com")).to eq(
         "score" => "80",
         "updated_on" => "2018-01-01",
