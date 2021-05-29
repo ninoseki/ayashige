@@ -9,6 +9,6 @@ RSpec.shared_examples "#store_newly_registered_domains example" do
   it "stores parsed domains into Redis" do
     output = capture(:stdout) { subject.store_newly_registered_domains }
     expect(output.include?(domain_name)).to eq(true)
-    expect(redis.exists(domain_name)).to eq(true)
+    expect(redis.exists(domain_name)).to eq(1)
   end
 end
