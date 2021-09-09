@@ -12,6 +12,7 @@ class TLD(AbstractRule):
 
     def match(self, domain: dataclasses.Domain) -> Optional[dataclasses.Rule]:
         if domain.tld in SUSPICIOUS_TLDS:
-            return dataclasses.Rule(name=self.name, score=20)
+            note = f"{domain.tld}:20"
+            return dataclasses.Rule(name=self.name, score=20, notes=[note])
 
         return None
