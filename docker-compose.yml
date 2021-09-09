@@ -18,6 +18,7 @@ services:
       - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/
       - SECURITY_TRAILS_API_KEY=${SECURITY_TRAILS_API_KEY}
     restart: always
+    depends_on:
       - redis
 
   certstream:
