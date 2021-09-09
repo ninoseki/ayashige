@@ -1,4 +1,6 @@
-from typing import Dict, List
+import json
+import os.path
+from typing import Dict, List, cast
 
 SUSPICIOUS_KEYWORDS: Dict[str, int] = {
     "login": 25,
@@ -174,3 +176,12 @@ SUSPICIOUS_TLDS: List[str] = [
     "science",
     "business",
 ]
+
+ALEXA_TOP_DOMAINS: List[str] = []
+
+current_dir = os.path.abspath(os.path.dirname(__file__))
+path = os.path.join(current_dir, "./data/alexa.json")
+
+with open(path) as f:
+    data = json.loads(f.read())
+    ALEXA_TOP_DOMAINS = cast(List[str], data.get("list", []))
