@@ -18,5 +18,6 @@ def test_dash(string: str, expected: bool):
     rule = tld.match(domain)
     if expected:
         assert rule is not None
+        assert rule.notes is not None
     else:
         assert rule is None
