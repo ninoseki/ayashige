@@ -1,2 +1,2 @@
 # Procfile
-web: bundle exec puma -C config/puma.rb
+web: gunicorn -k uvicorn.workers.UvicornWorker app.main:app

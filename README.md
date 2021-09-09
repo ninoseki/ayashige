@@ -12,7 +12,7 @@ Ayashige provides a list of suspicious newly registered domains as a JSON feed.
 - It computes a suspicious score of a given domain.
   - The scoring rule comes from [x0rz/phishing_catcher](https://github.com/x0rz/phishing_catcher).
 - It stores suspicious domains into a Redis instance.
-- It provides suspicious domains as a JSON via `/feed` endpoint.
+- It provides suspicious domains as a JSON via `/api/v1/domains/` endpoint.
 
 ## Installation
 
@@ -23,13 +23,11 @@ bundle install --path vendor/bundle
 
 ## Usage
 
-Please set following environment variables before using.
+Please set the following environment variables before using.
 
 ```sh
-REDIS_HOST = YOUR_REDIS_HOST
-REDIS_PORT = YOUR_REDIS_PORT
-REDIS_PASSWORD = YOUR_REDIS_PASSWORD
-SECURITYTRAILS_API_KEY = YOUR_SECURITYTRAILS_API_KEY
+REDIS_URL=redis://localhost:6379
+SECURITYTRAILS_API_KEY=YOUR_SECURITYTRAILS_API_KEY
 ```
 
 ### Run Cron jobs
