@@ -1,8 +1,7 @@
 # Ayashige
 
-[![Build Status](https://travis-ci.org/ninoseki/ayashige.svg?branch=master)](https://travis-ci.org/ninoseki/ayashige)
+[![Python CI](https://github.com/ninoseki/ayashige/actions/workflows/test.yaml/badge.svg)](https://github.com/ninoseki/ayashige/actions/workflows/test.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/ayashige/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/ayashige?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/249304b2af7c4a69ae5233ee93188c48)](https://www.codacy.com/app/ninoseki/ayashige)
 
 Ayashige provides a list of suspicious newly registered domains as a JSON feed.
 
