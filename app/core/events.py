@@ -20,7 +20,7 @@ def create_start_app_handler(
             try:
                 redis = await aioredis.create_redis_pool(str(settings.REDIS_URL))
                 backend = RedisBackend(redis)
-            except ConnectionRefusedError as e:
+            except (ConnectionRefusedError, OSError) as e:
                 logger.error("Failed to connect to Redis")
                 logger.exception(e)
 
