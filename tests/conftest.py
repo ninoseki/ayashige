@@ -1,6 +1,6 @@
 import fakeredis.aioredis
-import httpx
 import pytest
+from fastapi.testclient import TestClient
 
 from app.core.dependencies import get_redis
 from app.main import create_app
@@ -11,10 +11,13 @@ async def override_get_redis():
 
 
 @pytest.fixture
-async def client() -> httpx.AsyncClient:
+def client() -> TestClient:
     app = create_app()
 
     app.dependency_overrides[get_redis] = override_get_redis
 
-    async with httpx.AsyncClient(app=app, base_url="http://testserver") as client:
-        yield client
+    with TestClient(
+        app=app,
+        base_url="http://testserver",
+    ) as c:
+        yield c
