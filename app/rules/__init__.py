@@ -3,7 +3,7 @@ from typing import List, Optional, Type
 from app import dataclasses
 
 from .abstract import AbstractRule
-from .constants import ALEXA_TOP_DOMAINS
+from .constants import HIGH_REPUTATION_DOMAINS
 from .dash import Dash
 from .dot import Dot
 from .keyword import Keyword
@@ -20,8 +20,8 @@ RULES: List[Type[AbstractRule]] = [
 
 
 def has_high_reputation(domain: dataclasses.Domain) -> bool:
-    for top_domain in ALEXA_TOP_DOMAINS:
-        if domain.fqdn.endswith(f".{top_domain}"):
+    for high_reputation_domain in HIGH_REPUTATION_DOMAINS:
+        if domain.fqdn.endswith(f".{high_reputation_domain}"):
             return True
 
     return False
