@@ -177,11 +177,19 @@ SUSPICIOUS_TLDS: List[str] = [
     "business",
 ]
 
-ALEXA_TOP_DOMAINS: List[str] = []
+
+def load_warning_list(path: str) -> List[str]:
+    with open(path) as f:
+        data = json.loads(f.read())
+        return cast(List[str], data.get("list", []))
+
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
-path = os.path.join(current_dir, "./data/alexa.json")
 
-with open(path) as f:
-    data = json.loads(f.read())
-    ALEXA_TOP_DOMAINS = cast(List[str], data.get("list", []))
+
+ALEXA_TOP_DOMAINS: List[str] = load_warning_list(
+    os.path.join(current_dir, "./data/alexa.json")
+)
+MS_DOMAINS: List[str] = load_warning_list(os.path.join(current_dir, "./data/ms.json"))
+
+HIGH_REPUTATION_DOMAINS: List[str] = ALEXA_TOP_DOMAINS + MS_DOMAINS

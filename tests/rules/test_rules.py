@@ -1,5 +1,7 @@
 from typing import List, Optional
 
+import pytest
+
 from app import dataclasses
 from app.rules import match_rules
 
@@ -29,10 +31,14 @@ def test_match_rules():
     )
 
 
-def test_match_rules_with_high_reputation_domain():
-    domain = dataclasses.Domain(
-        # it has many dashes but it has high reputation (official amazon domain)
-        "ab-pricing-console-eu-dub.dub.proxy.amazon.com"
-    )
+@pytest.mark.parametrize(
+    "string",
+    [
+        "ab-pricing-console-eu-dub.dub.proxy.amazon.com",
+        "ab-pricing-console-eu-dub.dub.proxy.cas.ms",
+    ],
+)
+def test_match_rules_with_high_reputation_domain(string: str):
+    domain = dataclasses.Domain(string)
     rules = match_rules(domain)
     assert len(rules) == 0
