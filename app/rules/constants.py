@@ -191,5 +191,8 @@ ALEXA_TOP_DOMAINS: List[str] = load_warning_list(
     os.path.join(current_dir, "./data/alexa.json")
 )
 MS_DOMAINS: List[str] = load_warning_list(os.path.join(current_dir, "./data/ms.json"))
+OTHER_DOMAINS: List[str] = load_warning_list(
+    os.path.join(current_dir, "./data/other.json")
+)
 
-HIGH_REPUTATION_DOMAINS: List[str] = ALEXA_TOP_DOMAINS + MS_DOMAINS
+HIGH_REPUTATION_DOMAINS: List[str] = ALEXA_TOP_DOMAINS + MS_DOMAINS + OTHER_DOMAINS
