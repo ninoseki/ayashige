@@ -194,7 +194,9 @@
     "za.microsoftstore.com",
     "cas.ms",
     "mcas.ms",
-    "mcas-gov.us"
+    "mcas-gov.us",
+    "admin-rs-mcas.ms",
+    "admin-mcas.ms"
   ],
   "matching_attributes": ["domain", "hostname", "domain|ip"],
   "name": "List of known microsoft domains",
