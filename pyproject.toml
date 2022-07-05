@@ -19,7 +19,7 @@ pyhumps = "^3.0.2"
 pyopenssl = "^20.0.1"
 python-Levenshtein = "^0.12.2"
 tld = "^0.12.6"
-ujson = "^4.1.0"
+ujson = "^5.4.0"
 uvicorn = {extras = ["standard"], version = "^0.15.0"}
 websocket-client = "^1.2.1"
 
