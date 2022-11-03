@@ -1,5 +1,5 @@
 import asyncio
-from typing import Any, Dict, List
+from typing import Any
 
 from loguru import logger
 
@@ -11,13 +11,13 @@ from app.services import certstream
 
 
 async def save_suspicious_domains(
-    suspicious_domains: List[dataclasses.DomainWithVerdiction],
+    suspicious_domains: list[dataclasses.DomainWithVerdiction],
 ):
     async with get_redis_with_context() as redis:
         await Redis.save_suspicious_domains(suspicious_domains, redis=redis)
 
 
-def message_callback(message: Dict[str, Any]):
+def message_callback(message: dict[str, Any]):
     # check update message only
     update_message = dataclasses.CertStreamUpdateMessage.from_dict(message)
     if update_message is None:

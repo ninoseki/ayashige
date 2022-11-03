@@ -1,7 +1,7 @@
 import functools
 import re
 from dataclasses import dataclass
-from typing import List, cast
+from typing import cast
 
 import tld
 
@@ -36,5 +36,5 @@ class Domain:
         return f"{self._parsed.subdomain}.{self._parsed.domain}"
 
     @functools.cached_property
-    def inner_words(self) -> List[str]:
+    def inner_words(self) -> list[str]:
         return re.split(r"\W+", self.without_tld)

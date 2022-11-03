@@ -6,10 +6,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      redis:
+        image: "redis/redis-stack:6.2.4-v2"
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     strategy:
       matrix:
         python-version: [3.9]
-        poetry-version: [1.1.8]
+        poetry-version: [1.1.15]
 
     steps:
       - uses: actions/checkout@v2
@@ -27,6 +38,8 @@ jobs:
           poetry install
 
       - name: Run tests
+        env:
+          REDIS_URL: redis://localhost:6379
         run: |
           poetry run pytest -v --cov=app --cov-report=term-missing
 

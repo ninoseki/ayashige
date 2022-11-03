@@ -1,7 +1,6 @@
 import json
-from typing import List
 
-import aioredis
+from redis import asyncio as aioredis
 
 from app import dataclasses
 
@@ -12,7 +11,7 @@ class Redis:
     @classmethod
     async def save_suspicious_domains(
         cls,
-        suspicious_domains: List[dataclasses.DomainWithVerdiction],
+        suspicious_domains: list[dataclasses.DomainWithVerdiction],
         *,
         redis: aioredis.Redis
     ):

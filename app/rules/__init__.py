@@ -1,4 +1,4 @@
-from typing import List, Optional, Type
+from typing import Optional
 
 from app import dataclasses
 
@@ -10,7 +10,7 @@ from .keyword import Keyword
 from .levenshtein import LevenshteinDistance
 from .tld import TLD
 
-RULES: List[Type[AbstractRule]] = [
+RULES: list[type[AbstractRule]] = [
     Dash(),
     Dot(),
     Keyword(),
@@ -27,12 +27,12 @@ def has_high_reputation(domain: dataclasses.Domain) -> bool:
     return False
 
 
-def match_rules(domain: dataclasses.Domain) -> List[dataclasses.Rule]:
+def match_rules(domain: dataclasses.Domain) -> list[dataclasses.Rule]:
     # skip matching if it has a high reputation
     if has_high_reputation(domain):
         return []
 
-    matched_rules: List[Optional[dataclasses.Rule]] = []
+    matched_rules: list[Optional[dataclasses.Rule]] = []
     for rule in RULES:
         matched_rules.append(rule.match(domain))
 

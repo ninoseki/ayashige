@@ -1,6 +1,6 @@
 import json
 import time
-from typing import Callable, Optional, Type
+from typing import Callable, Optional
 
 from loguru import logger
 from websocket import WebSocketApp
@@ -41,7 +41,7 @@ class CertStreamClient(WebSocketApp):
 
         self.message_callback(frame)
 
-    def _on_error(self, _, ex: Type[Exception]):
+    def _on_error(self, _, ex: type[Exception]):
         if type(ex) == KeyboardInterrupt:
             raise
 

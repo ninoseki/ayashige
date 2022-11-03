@@ -1,5 +1,3 @@
-from typing import List
-
 import pytest
 
 from app.dataclasses import Domain
@@ -51,6 +49,6 @@ def test_without_tld(string: str, expected: str):
         ("foo-bar-example.com", ["foo", "bar", "example"]),
     ],
 )
-def test_inner_words(string: str, expected: List[str]):
+def test_inner_words(string: str, expected: list[str]):
     domain = Domain(string)
     assert domain.inner_words == expected

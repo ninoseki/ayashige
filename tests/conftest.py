@@ -1,23 +1,32 @@
-import fakeredis.aioredis
-import pytest
-from fastapi.testclient import TestClient
+import asyncio
 
-from app.core.dependencies import get_redis
+import pytest
+import pytest_asyncio
+from fastapi import FastAPI
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.inmemory import InMemoryBackend
+from httpx import AsyncClient
+
 from app.main import create_app
 
 
-async def override_get_redis():
-    return await fakeredis.aioredis.create_redis_pool()
+@pytest.fixture(scope="session")
+def event_loop():
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
 
 
 @pytest.fixture
-def client() -> TestClient:
-    app = create_app()
+def app():
+    FastAPICache.init(InMemoryBackend())
 
-    app.dependency_overrides[get_redis] = override_get_redis
+    app = create_app(add_event_handlers=False)
 
-    with TestClient(
-        app=app,
-        base_url="http://testserver",
-    ) as c:
-        yield c
+    yield app
+
+
+@pytest_asyncio.fixture
+async def client(app: FastAPI):
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        yield client

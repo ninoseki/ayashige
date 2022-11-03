@@ -1,8 +1,8 @@
 import json
 import os.path
-from typing import Dict, List, cast
+from typing import cast
 
-SUSPICIOUS_KEYWORDS: Dict[str, int] = {
+SUSPICIOUS_KEYWORDS: dict[str, int] = {
     "login": 25,
     "log-in": 25,
     "sign-in": 25,
@@ -137,7 +137,7 @@ SUSPICIOUS_KEYWORDS: Dict[str, int] = {
 }
 
 
-SUSPICIOUS_TLDS: List[str] = [
+SUSPICIOUS_TLDS: list[str] = [
     "ga",
     "gq",
     "ml",
@@ -178,21 +178,21 @@ SUSPICIOUS_TLDS: List[str] = [
 ]
 
 
-def load_warning_list(path: str) -> List[str]:
+def load_warning_list(path: str) -> list[str]:
     with open(path) as f:
         data = json.loads(f.read())
-        return cast(List[str], data.get("list", []))
+        return cast(list[str], data.get("list", []))
 
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
 
 
-ALEXA_TOP_DOMAINS: List[str] = load_warning_list(
+ALEXA_TOP_DOMAINS: list[str] = load_warning_list(
     os.path.join(current_dir, "./data/alexa.json")
 )
-MS_DOMAINS: List[str] = load_warning_list(os.path.join(current_dir, "./data/ms.json"))
-OTHER_DOMAINS: List[str] = load_warning_list(
+MS_DOMAINS: list[str] = load_warning_list(os.path.join(current_dir, "./data/ms.json"))
+OTHER_DOMAINS: list[str] = load_warning_list(
     os.path.join(current_dir, "./data/other.json")
 )
 
-HIGH_REPUTATION_DOMAINS: List[str] = ALEXA_TOP_DOMAINS + MS_DOMAINS + OTHER_DOMAINS
+HIGH_REPUTATION_DOMAINS: list[str] = ALEXA_TOP_DOMAINS + MS_DOMAINS + OTHER_DOMAINS

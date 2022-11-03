@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 
 from app import dataclasses
 from app.rules.abstract import AbstractRule
@@ -11,8 +11,8 @@ class Keyword(AbstractRule):
         self.name: str = "suspicious_keyword"
 
     def match(self, domain: dataclasses.Domain) -> Optional[dataclasses.Rule]:
-        scores: List[int] = []
-        matched_keywords: List[str] = []
+        scores: list[int] = []
+        matched_keywords: list[str] = []
 
         for keyword, score in SUSPICIOUS_KEYWORDS.items():
             if keyword in domain.inner_words:
