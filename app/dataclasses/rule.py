@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Optional
 
 
 @dataclass
 class Rule:
     name: str
     score: int
-    notes: Optional[List[str]] = None
+    notes: Optional[list[str]] = None

@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 
 from arq import cron
 from arq.connections import RedisSettings
@@ -20,7 +20,7 @@ async def shutdown(ctx: dict) -> None:
 
 async def save_newly_suspicious_domains_from_security_trails(
     _: dict,
-) -> List[dataclasses.DomainWithVerdiction]:
+) -> list[dataclasses.DomainWithVerdiction]:
     suspicious_domains = await SuspiciousDomainsFactory.from_security_trails()
 
     async with get_redis_with_context() as redis:

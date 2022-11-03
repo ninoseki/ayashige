@@ -1,6 +1,5 @@
 import functools
 from dataclasses import asdict, dataclass
-from typing import List
 
 from app.rules import match_rules
 
@@ -14,7 +13,7 @@ class DomainWithVerdiction(Domain):
     updated_on: str
 
     @functools.cached_property
-    def matched_rules(self) -> List[Rule]:
+    def matched_rules(self) -> list[Rule]:
         return match_rules(self)
 
     @functools.cached_property

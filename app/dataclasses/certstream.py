@@ -1,12 +1,12 @@
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 from dataclasses_json import DataClassJsonMixin
 
 
 @dataclass
 class LeafCERT:
-    all_domains: List[str]
+    all_domains: list[str]
 
 
 @dataclass
@@ -32,7 +32,7 @@ class CertStreamUpdateMessage(DataClassJsonMixin):
 
     @classmethod
     def from_message(
-        cls, message: Dict[str, Any]
+        cls, message: dict[str, Any]
     ) -> Optional["CertStreamUpdateMessage"]:
         message_type = message.get("message_type")
         if message_type == "certificate_update":

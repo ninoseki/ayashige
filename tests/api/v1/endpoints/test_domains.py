@@ -1,6 +1,8 @@
-from fastapi.testclient import TestClient
+import pytest
+from httpx import AsyncClient
 
 
-def test_domains(client: TestClient):
-    res = client.get("/api/v1/domains/")
+@pytest.mark.asyncio
+async def test_domains(client: AsyncClient):
+    res = await client.get("/api/v1/domains/")
     assert res.status_code == 200

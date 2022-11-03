@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 
 from Levenshtein import distance
 
@@ -7,12 +7,12 @@ from app.rules.abstract import AbstractRule
 
 from .constants import SUSPICIOUS_KEYWORDS
 
-SUSPICIOUS_KEYWORDS_FOR_LEVENSHTEIN_DISTANCE: List[str] = []
+SUSPICIOUS_KEYWORDS_FOR_LEVENSHTEIN_DISTANCE: list[str] = []
 for keyword, score in SUSPICIOUS_KEYWORDS.items():
     if score >= 70:
         SUSPICIOUS_KEYWORDS_FOR_LEVENSHTEIN_DISTANCE.append(keyword)
 
-IGNORE_KEYWORDS: List[str] = ["email", "mail", "cloud"]
+IGNORE_KEYWORDS: list[str] = ["email", "mail", "cloud"]
 
 
 class LevenshteinDistance(AbstractRule):
@@ -21,7 +21,7 @@ class LevenshteinDistance(AbstractRule):
 
     def match(self, domain: dataclasses.Domain) -> Optional[dataclasses.Rule]:
         score = 0
-        matched_keywords: List[str] = []
+        matched_keywords: list[str] = []
 
         for keyword in SUSPICIOUS_KEYWORDS_FOR_LEVENSHTEIN_DISTANCE:
             for word in domain.inner_words:

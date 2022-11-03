@@ -6,7 +6,7 @@ RUN apk --no-cache add build-base gcc musl-dev python3-dev libffi-dev openssl-de
 
 COPY pyproject.toml poetry.lock ./
 
-RUN pip install poetry && \
+RUN pip install poetry==1.1.15 && \
 	poetry config virtualenvs.create false && \
 	poetry install --no-dev
 

@@ -1,8 +1,9 @@
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator, Optional
+from typing import Optional
 
-import aioredis
 import arq
+from redis import asyncio as aioredis
 
 from app.core import settings
 
@@ -20,12 +21,11 @@ async def get_redis_with_context() -> AsyncGenerator[aioredis.Redis, None]:
     redis: Optional[aioredis.Redis] = None
 
     try:
-        redis = await aioredis.create_redis_pool(str(settings.REDIS_URL))
+        redis = await aioredis.from_url(str(settings.REDIS_URL))
         yield redis
     finally:
         if redis is not None:
-            redis.close()
-            await redis.wait_closed()
+            await redis.close()
 
 
 async def get_redis():

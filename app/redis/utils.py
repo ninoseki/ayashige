@@ -1,5 +1,4 @@
 import json
-from typing import List
 
 import aioredis
 
@@ -9,7 +8,7 @@ from .constants import DEFAULT_TTL, KEY_PREFIX
 
 
 async def save_suspicious_domains(
-    suspicious_domains: List[dataclasses.DomainWithVerdiction], *, redis: aioredis.Redis
+    suspicious_domains: list[dataclasses.DomainWithVerdiction], *, redis: aioredis.Redis
 ):
     tr = redis.multi_exec()
 

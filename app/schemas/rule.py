@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 
 from .api_model import APIModel
 
@@ -6,4 +6,4 @@ from .api_model import APIModel
 class Rule(APIModel):
     name: str
     score: int
-    notes: Optional[List[str]]
+    notes: Optional[list[str]]
