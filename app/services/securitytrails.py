@@ -1,5 +1,4 @@
 import gzip
-from typing import Optional
 
 import httpx
 
@@ -10,11 +9,11 @@ class SecurityTrails:
     def __init__(self):
         self.base_url = "https://api.securitytrails.com/v1"
 
-    async def download_new_domain_feed(self, *, date: Optional[str] = None):
+    async def download_new_domain_feed(self, *, date: str | None = None):
         url = self._url_for("/feeds/domains/registered")
         headers = {
             "accept-encoding": "application/gzip",
-            "apikey": str(settings.SECURITYTRAILS_API_KEY),
+            "apikey": str(settings.SECURITY_TRAILS_API_KEY),
         }
 
         params = {}

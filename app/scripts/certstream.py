@@ -3,10 +3,9 @@ from typing import Any
 
 from loguru import logger
 
-from app import dataclasses
+from app import crud, dataclasses
 from app.core.dependencies import get_redis_with_context
 from app.factories.suspicious_domains import SuspiciousDomainsFactory
-from app.redis import Redis
 from app.services import certstream
 
 
@@ -14,7 +13,7 @@ async def save_suspicious_domains(
     suspicious_domains: list[dataclasses.DomainWithVerdiction],
 ):
     async with get_redis_with_context() as redis:
-        await Redis.save_suspicious_domains(suspicious_domains, redis=redis)
+        await crud.redis.bulk_save(redis, suspicious_domains=suspicious_domains)
 
 
 def message_callback(message: dict[str, Any]):

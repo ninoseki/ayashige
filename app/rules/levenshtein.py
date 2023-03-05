@@ -1,5 +1,3 @@
-from typing import Optional
-
 from Levenshtein import distance
 
 from app import dataclasses
@@ -19,7 +17,7 @@ class LevenshteinDistance(AbstractRule):
     def __init__(self):
         self.name: str = "suspicious_keyword_levenshtein_distance"
 
-    def match(self, domain: dataclasses.Domain) -> Optional[dataclasses.Rule]:
+    def match(self, domain: dataclasses.Domain) -> dataclasses.Rule | None:
         score = 0
         matched_keywords: list[str] = []
 

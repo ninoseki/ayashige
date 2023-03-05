@@ -1,6 +1,6 @@
 import json
 import time
-from typing import Callable, Optional
+from collections.abc import Callable
 
 from loguru import logger
 from websocket import WebSocketApp
@@ -12,8 +12,8 @@ class CertStreamClient(WebSocketApp):
         message_callback: Callable,
         url: str,
         skip_heartbeats: bool = True,
-        on_open: Optional[Callable] = None,
-        on_error: Optional[Callable] = None,
+        on_open: Callable | None = None,
+        on_error: Callable | None = None,
     ):
         self.message_callback = message_callback
         self.skip_heartbeats = skip_heartbeats
@@ -57,8 +57,8 @@ def listen_for_events(
     message_callback: Callable,
     url: str,
     skip_heartbeats: bool = True,
-    on_open: Optional[Callable] = None,
-    on_error: Optional[Callable] = None,
+    on_open: Callable | None = None,
+    on_error: Callable | None = None,
     **kwargs,
 ):
     try:

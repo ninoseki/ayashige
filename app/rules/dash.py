@@ -1,5 +1,3 @@
-from typing import Optional
-
 from app import dataclasses
 from app.rules.abstract import AbstractRule
 
@@ -8,7 +6,7 @@ class Dash(AbstractRule):
     def __init__(self):
         self.name: str = "too_many_dashes"
 
-    def match(self, domain: "dataclasses.Domain") -> Optional[dataclasses.Rule]:
+    def match(self, domain: "dataclasses.Domain") -> dataclasses.Rule | None:
         if "xn--" in domain.fqdn:
             return None
 

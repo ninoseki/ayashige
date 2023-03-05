@@ -1,5 +1,3 @@
-from typing import Optional
-
 from app import dataclasses
 from app.services.securitytrails import SecurityTrails
 from app.utils import get_today_in_isoformat
@@ -8,7 +6,7 @@ from app.utils import get_today_in_isoformat
 class SuspiciousDomainsFactory:
     @classmethod
     def from_list(
-        cls, domains: list[str], source: str, *, updated_on: Optional[str] = None
+        cls, domains: list[str], source: str, *, updated_on: str | None = None
     ) -> list[dataclasses.DomainWithVerdiction]:
         if updated_on is None:
             updated_on = get_today_in_isoformat()

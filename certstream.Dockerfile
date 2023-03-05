@@ -1,4 +1,4 @@
-FROM python:3.9-alpine3.16
+FROM python:3.11-alpine
 
 WORKDIR /ayashige
 
@@ -6,7 +6,7 @@ RUN apk --no-cache add build-base gcc musl-dev python3-dev libffi-dev openssl-de
 
 COPY pyproject.toml poetry.lock ./
 
-RUN pip install poetry==1.1.15 && \
+RUN pip install poetry==1.4.0 && \
 	poetry config virtualenvs.create false && \
 	poetry install --no-dev
 

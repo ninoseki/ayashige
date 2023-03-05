@@ -1,5 +1,3 @@
-from typing import Optional
-
 from app import dataclasses
 from app.rules.abstract import AbstractRule
 
@@ -10,7 +8,7 @@ class Keyword(AbstractRule):
     def __init__(self):
         self.name: str = "suspicious_keyword"
 
-    def match(self, domain: dataclasses.Domain) -> Optional[dataclasses.Rule]:
+    def match(self, domain: dataclasses.Domain) -> dataclasses.Rule | None:
         scores: list[int] = []
         matched_keywords: list[str] = []
 

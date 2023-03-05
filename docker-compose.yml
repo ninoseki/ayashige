@@ -5,7 +5,7 @@ services:
     ports:
       - "6379:6379"
     environment:
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-password}
     restart: always
     volumes:
       - "redis-data:/data"
@@ -15,7 +15,7 @@ services:
       context: ./
       dockerfile: worker.Dockerfile
     environment:
-      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-password}@redis:6379/
       - SECURITY_TRAILS_API_KEY=${SECURITY_TRAILS_API_KEY}
     restart: always
     depends_on:
@@ -26,8 +26,7 @@ services:
       context: ./
       dockerfile: certstream.Dockerfile
     environment:
-      - SECURITY_TRAILS_API_KEY=${SECURITY_TRAILS_API_KEY}
-      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-password}@redis:6379/
     restart: always
     depends_on:
       - redis
@@ -39,10 +38,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - TESTING=False
-      - DEBUG=False
-      - SECURITY_TRAILS_API_KEY=${SECURITY_TRAILS_API_KEY}
-      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-password}@redis:6379/
     restart: always
     depends_on:
       - redis

@@ -3,8 +3,6 @@ import asyncio
 import pytest
 import pytest_asyncio
 from fastapi import FastAPI
-from fastapi_cache import FastAPICache
-from fastapi_cache.backends.inmemory import InMemoryBackend
 from httpx import AsyncClient
 
 from app.main import create_app
@@ -19,11 +17,7 @@ def event_loop():
 
 @pytest.fixture
 def app():
-    FastAPICache.init(InMemoryBackend())
-
-    app = create_app(add_event_handlers=False)
-
-    yield app
+    return create_app(add_event_handlers=False)
 
 
 @pytest_asyncio.fixture
