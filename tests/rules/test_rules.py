@@ -1,5 +1,3 @@
-from typing import Optional
-
 import pytest
 
 from app import dataclasses
@@ -8,7 +6,7 @@ from app.rules import match_rules
 
 def find_rule_by_name(
     rules: list[dataclasses.Rule], name: str
-) -> Optional[dataclasses.Rule]:
+) -> dataclasses.Rule | None:
     for rule in rules:
         if rule.name == name:
             return rule

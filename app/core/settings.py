@@ -1,6 +1,7 @@
 import sys
 from typing import TextIO
 
+from arq.connections import RedisSettings
 from starlette.config import Config
 from starlette.datastructures import Secret
 
@@ -30,5 +31,28 @@ REDIS_URL: DatabaseURL = config(
     "REDIS_URL", cast=DatabaseURL, default="redis://localhost:6379"
 )
 
+REDIS_CACHE_TTL: int = config(
+    "REDIS_CACHE_TTL",
+    cast=int,
+    default=60 * 60,
+)
+REDIS_CACHE_NAMESPACE: str = config("REDIS_CACHE_NAMESPACE", cast=str, default="cache")
+REDIS_CACHE_PREFIX: str = config(
+    "REDIS_CACHE_PREFIX", cast=str, default="fastapi-cache"
+)
+
+REDIS_SETTINGS = RedisSettings(
+    host=REDIS_URL.hostname or "localhost",
+    port=REDIS_URL.port or 6379,
+    password=REDIS_URL.password,
+)
+
+REDIS_SUSPICIOUS_DOMAIN_KEY_PREFIX: str = config(
+    "REDIS_SUSPICIOUS_DOMAIN_KEY_PREFIX", cast=str, default="domain:"
+)
+REDIS_SUSPICIOUS_DOMAIN_TTL: int = config(
+    "REDIS_SUSPICIOUS_DOMAIN_TTL", cast=int, default=60 * 60 * 24
+)
+
 # ST settings
-SECURITYTRAILS_API_KEY = config("SECURITYTRAILS_API_KEY", cast=Secret, default="")
+SECURITY_TRAILS_API_KEY = config("SECURITY_TRAILS_API_KEY", cast=Secret, default="")

@@ -1,5 +1,3 @@
-from typing import Optional
-
 from app import dataclasses
 
 from .abstract import AbstractRule
@@ -32,7 +30,7 @@ def match_rules(domain: dataclasses.Domain) -> list[dataclasses.Rule]:
     if has_high_reputation(domain):
         return []
 
-    matched_rules: list[Optional[dataclasses.Rule]] = []
+    matched_rules: list[dataclasses.Rule | None] = []
     for rule in RULES:
         matched_rules.append(rule.match(domain))
 

@@ -1,5 +1,4 @@
 import math
-from typing import Optional
 
 from app import dataclasses
 from app.rules.abstract import AbstractRule
@@ -15,7 +14,7 @@ class Entropy(AbstractRule):
     def __init__(self):
         self.name: str = "entropy"
 
-    def match(self, domain: dataclasses.Domain) -> Optional[dataclasses.Rule]:
+    def match(self, domain: dataclasses.Domain) -> dataclasses.Rule | None:
         entropy = calculate_entropy(domain.without_tld)
         score = int(round(entropy) * 10)
         return dataclasses.Rule(name=self.name, score=score)

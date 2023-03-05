@@ -40,7 +40,7 @@ class DatabaseURL:
         return self.components.scheme.split("+", 1)[1]
 
     @property
-    def userinfo(self) -> typing.Optional[bytes]:
+    def userinfo(self) -> bytes | None:
         if self.components.username:
             info = self.components.username
             if self.components.password:
@@ -49,27 +49,27 @@ class DatabaseURL:
         return None
 
     @property
-    def username(self) -> typing.Optional[str]:
+    def username(self) -> str | None:
         if self.components.username is None:
             return None
         return unquote(self.components.username)
 
     @property
-    def password(self) -> typing.Optional[str]:
+    def password(self) -> str | None:
         if self.components.password is None:
             return None
         return unquote(self.components.password)
 
     @property
-    def hostname(self) -> typing.Optional[str]:
+    def hostname(self) -> str | None:
         return self.components.hostname
 
     @property
-    def port(self) -> typing.Optional[int]:
+    def port(self) -> int | None:
         return self.components.port
 
     @property
-    def netloc(self) -> typing.Optional[str]:
+    def netloc(self) -> str | None:
         return self.components.netloc
 
     @property
