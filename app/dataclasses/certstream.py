@@ -1,22 +1,18 @@
-from dataclasses import dataclass
 from typing import Any, Optional
 
-from dataclasses_json import DataClassJsonMixin
+from pydantic import BaseModel
 
 
-@dataclass
-class LeafCERT:
+class LeafCERT(BaseModel):
     all_domains: list[str]
 
 
-@dataclass
-class Source:
+class Source(BaseModel):
     name: str
     url: str
 
 
-@dataclass
-class Data:
+class Data(BaseModel):
     cert_index: int
     cert_link: str
     leaf_cert: LeafCERT
@@ -25,8 +21,7 @@ class Data:
     update_type: str
 
 
-@dataclass
-class CertStreamUpdateMessage(DataClassJsonMixin):
+class CertStreamUpdateMessage(BaseModel):
     data: Data
     message_type: str
 
@@ -36,6 +31,6 @@ class CertStreamUpdateMessage(DataClassJsonMixin):
     ) -> Optional["CertStreamUpdateMessage"]:
         message_type = message.get("message_type")
         if message_type == "certificate_update":
-            return cls.from_dict(message)
+            return cls.model_validate(message)
 
         return None

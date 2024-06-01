@@ -18,7 +18,7 @@ async def shutdown(ctx: dict) -> None:
 
 async def save_newly_suspicious_domains_from_security_trails(
     _: dict,
-) -> list[dataclasses.DomainWithVerdiction]:
+) -> list[dataclasses.DomainWithVerdict]:
     suspicious_domains = await SuspiciousDomainsFactory.from_security_trails()
 
     async with get_redis_with_context() as redis:

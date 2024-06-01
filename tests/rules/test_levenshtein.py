@@ -13,7 +13,7 @@ from app.rules import LevenshteinDistance
     ],
 )
 def test_dash(string: str, expected: bool):
-    domain = dataclasses.Domain(string)
+    domain = dataclasses.Domain(fqdn=string)
 
     levenshtein = LevenshteinDistance()
     rule = levenshtein.match(domain)

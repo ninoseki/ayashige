@@ -20,7 +20,7 @@ async def _get_domains(redis: Redis) -> list[schemas.Domain]:
     values = await redis.mget(*keys)
 
     dicts: list[dict] = [json.loads(value) for value in values]
-    return [schemas.Domain.parse_obj(d) for d in dicts]
+    return [schemas.Domain.model_validate(d) for d in dicts]
 
 
 @router.get(

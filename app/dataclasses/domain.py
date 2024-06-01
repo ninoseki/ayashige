@@ -1,12 +1,12 @@
-import functools
 import re
-from dataclasses import dataclass
 from typing import cast
+from functools import lru_cache, cached_property
 
 import tld
+from pydantic import BaseModel, model_validator
 
 
-@functools.lru_cache(maxsize=1024)
+@lru_cache(maxsize=1024)
 def get_tld(s: str) -> tld.Result:
     res = tld.get_tld(s, as_object=True, fix_protocol=True)
     return cast(tld.Result, res)
@@ -16,25 +16,29 @@ def remove_wildcard(fqdn: str) -> str:
     return fqdn.removeprefix("*.")
 
 
-@dataclass
-class Domain:
+class Domain(BaseModel):
     fqdn: str
 
-    def __post_init__(self):
+    @model_validator(mode="after")
+    def post_init(self):
         self.fqdn = remove_wildcard(self.fqdn)
-        self._parsed = get_tld(self.fqdn)
+        return self
+
+    @cached_property
+    def parsed(self) -> tld.Result:
+        return get_tld(self.fqdn)
 
     @property
     def tld(self) -> str:
-        return self._parsed.tld
+        return self.parsed.tld
 
-    @functools.cached_property
+    @cached_property
     def without_tld(self) -> str:
-        if self._parsed.subdomain == "":
-            return self._parsed.domain
+        if self.parsed.subdomain == "":
+            return self.parsed.domain
 
-        return f"{self._parsed.subdomain}.{self._parsed.domain}"
+        return f"{self.parsed.subdomain}.{self.parsed.domain}"
 
-    @functools.cached_property
+    @cached_property
     def inner_words(self) -> list[str]:
         return re.split(r"\W+", self.without_tld)

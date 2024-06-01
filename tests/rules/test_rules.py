@@ -16,7 +16,7 @@ def find_rule_by_name(
 
 def test_match_rules():
     domain = dataclasses.Domain(
-        "apps-secure1-verify-information-foo-bar.apps.secure1.netfliz.verify.information.foo.bar.example.ga"
+        fqdn="apps-secure1-verify-information-foo-bar.apps.secure1.netfliz.verify.information.foo.bar.example.ga"
     )
     rules = match_rules(domain)
 
@@ -37,6 +37,6 @@ def test_match_rules():
     ],
 )
 def test_match_rules_with_high_reputation_domain(string: str):
-    domain = dataclasses.Domain(string)
+    domain = dataclasses.Domain(fqdn=string)
     rules = match_rules(domain)
     assert len(rules) == 0

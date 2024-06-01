@@ -13,7 +13,7 @@ from app.rules import Dot
     ],
 )
 def test_dash(string: str, expected: bool):
-    domain = dataclasses.Domain(string)
+    domain = dataclasses.Domain(fqdn=string)
 
     dot = Dot()
     rule = dot.match(domain)

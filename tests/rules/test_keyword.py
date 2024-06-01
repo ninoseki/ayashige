@@ -12,7 +12,7 @@ from app.rules import Keyword
     ],
 )
 def test_dash(string: str, expected: bool):
-    domain = dataclasses.Domain(string)
+    domain = dataclasses.Domain(fqdn=string)
 
     keyword = Keyword()
     rule = keyword.match(domain)

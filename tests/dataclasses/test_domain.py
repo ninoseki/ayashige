@@ -11,7 +11,7 @@ from app.dataclasses import Domain
     ],
 )
 def test_remove_wildcard(string: str, expected: str):
-    domain = Domain(string)
+    domain = Domain(fqdn=string)
     assert domain.fqdn == expected
 
 
@@ -23,7 +23,7 @@ def test_remove_wildcard(string: str, expected: str):
     ],
 )
 def test_tld(string: str, expected: str):
-    domain = Domain(string)
+    domain = Domain(fqdn=string)
     assert domain.tld == expected
 
 
@@ -36,7 +36,7 @@ def test_tld(string: str, expected: str):
     ],
 )
 def test_without_tld(string: str, expected: str):
-    domain = Domain(string)
+    domain = Domain(fqdn=string)
     assert domain.without_tld == expected
 
 
@@ -50,5 +50,5 @@ def test_without_tld(string: str, expected: str):
     ],
 )
 def test_inner_words(string: str, expected: list[str]):
-    domain = Domain(string)
+    domain = Domain(fqdn=string)
     assert domain.inner_words == expected

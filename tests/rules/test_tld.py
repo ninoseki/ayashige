@@ -12,7 +12,7 @@ from app.rules import TLD
     ],
 )
 def test_dash(string: str, expected: bool):
-    domain = dataclasses.Domain(string)
+    domain = dataclasses.Domain(fqdn=string)
 
     tld = TLD()
     rule = tld.match(domain)

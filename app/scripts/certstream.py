@@ -10,7 +10,7 @@ from app.services import certstream
 
 
 async def save_suspicious_domains(
-    suspicious_domains: list[dataclasses.DomainWithVerdiction],
+    suspicious_domains: list[dataclasses.DomainWithVerdict],
 ):
     async with get_redis_with_context() as redis:
         await crud.redis.bulk_save(redis, suspicious_domains=suspicious_domains)
