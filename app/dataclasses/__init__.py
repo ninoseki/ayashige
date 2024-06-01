@@ -1,6 +1,6 @@
 from .certstream import CertStreamUpdateMessage
 from .domain import Domain
 from .rule import Rule
-from .verdiction import DomainWithVerdiction
+from .verdict import DomainWithVerdict
 
-__all__ = ["Rule", "Domain", "DomainWithVerdiction", "CertStreamUpdateMessage"]
+__all__ = ["Rule", "Domain", "DomainWithVerdict", "CertStreamUpdateMessage"]

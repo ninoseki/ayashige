@@ -13,7 +13,7 @@ from app.rules import Dash
     ],
 )
 def test_dash(string: str, expected: bool):
-    domain = dataclasses.Domain(string)
+    domain = dataclasses.Domain(fqdn=string)
 
     dash = Dash()
     rule = dash.match(domain)

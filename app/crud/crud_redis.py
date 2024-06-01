@@ -11,9 +11,9 @@ class CRUDRedis:
         self,
         redis: Redis,
         *,
-        suspicious_domains: list[dataclasses.DomainWithVerdiction],
+        suspicious_domains: list[dataclasses.DomainWithVerdict],
         expire: int = settings.REDIS_SUSPICIOUS_DOMAIN_TTL,
-        key_prefix: str = settings.REDIS_SUSPICIOUS_DOMAIN_KEY_PREFIX
+        key_prefix: str = settings.REDIS_SUSPICIOUS_DOMAIN_KEY_PREFIX,
     ):
         async with redis.pipeline(transaction=True) as pipe:
             for domain in suspicious_domains:

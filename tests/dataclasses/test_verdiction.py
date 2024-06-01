@@ -1,6 +1,6 @@
 import pytest
 
-from app.dataclasses import DomainWithVerdiction
+from app.dataclasses import DomainWithVerdict
 
 
 @pytest.mark.parametrize(
@@ -14,5 +14,5 @@ from app.dataclasses import DomainWithVerdiction
     ],
 )
 def test_is_suspicious(string: str, expected: bool):
-    domain = DomainWithVerdiction(fqdn=string, source="dummy", updated_on="dummy")
+    domain = DomainWithVerdict(fqdn=string, source="dummy", updated_on="dummy")
     assert domain.is_suspicious is expected

@@ -7,13 +7,13 @@ class SuspiciousDomainsFactory:
     @classmethod
     def from_list(
         cls, domains: list[str], source: str, *, updated_on: str | None = None
-    ) -> list[dataclasses.DomainWithVerdiction]:
+    ) -> list[dataclasses.DomainWithVerdict]:
         if updated_on is None:
             updated_on = get_today_in_isoformat()
 
-        suspicious_domains: list[dataclasses.DomainWithVerdiction] = []
+        suspicious_domains: list[dataclasses.DomainWithVerdict] = []
         for new_domain in domains:
-            domain = dataclasses.DomainWithVerdiction(
+            domain = dataclasses.DomainWithVerdict(
                 fqdn=new_domain, source=source, updated_on=updated_on
             )
             if domain.is_suspicious:
@@ -22,7 +22,7 @@ class SuspiciousDomainsFactory:
         return suspicious_domains
 
     @classmethod
-    async def from_security_trails(cls) -> list[dataclasses.DomainWithVerdiction]:
+    async def from_security_trails(cls) -> list[dataclasses.DomainWithVerdict]:
         st = SecurityTrails()
         date = get_today_in_isoformat()
         new_domains = await st.download_new_domain_feed(date=date)

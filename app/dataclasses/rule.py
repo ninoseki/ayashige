@@ -1,8 +1,7 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class Rule:
+class Rule(BaseModel):
     name: str
     score: int
     notes: list[str] | None = None
