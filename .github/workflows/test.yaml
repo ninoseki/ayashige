@@ -23,8 +23,8 @@ jobs:
         poetry-version: [1.4.0]
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -40,8 +40,7 @@ jobs:
       - name: Run tests
         env:
           REDIS_URL: redis://localhost:6379
-        run: |
-          poetry run pytest -v --cov=app --cov-report=term-missing
+        run: poetry run pytest -v --cov=app --cov-report=term-missing
 
       - name: Coveralls
         env:
