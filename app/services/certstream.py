@@ -42,7 +42,7 @@ class CertStreamClient(WebSocketApp):
         self.message_callback(frame)
 
     def _on_error(self, _, ex: type[Exception]):
-        if type(ex) == KeyboardInterrupt:
+        if isinstance(ex, KeyboardInterrupt):
             raise
 
         if self.on_error_handler:
